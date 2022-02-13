@@ -25,6 +25,13 @@ dependencies {
     implementation(Versions.Jvm.JETBRAINS_EXPOSED_DAO)
     implementation(Versions.Jvm.JETBRAINS_EXPOSED_JDBC)
 
+    // PostgreSQL
+    implementation(Versions.Jvm.POSTGRESQL)
+    implementation(Versions.Jvm.HIKARI_CONNECTION_POOL)
+
+    // Koin
+    implementation(Versions.Jvm.KOIN_KTOR)
+
 }
 
 tasks.withType<ShadowJar> {
