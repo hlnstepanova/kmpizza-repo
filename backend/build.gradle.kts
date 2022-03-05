@@ -8,6 +8,7 @@ plugins {
     kotlin("jvm")
     application
     id("com.github.johnrengelman.shadow") version Versions.SHADOW_JAR_VERSION
+    kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
 }
 
 dependencies {

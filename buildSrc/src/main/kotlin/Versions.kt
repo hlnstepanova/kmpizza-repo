@@ -1,10 +1,12 @@
 object Versions {
+    const val KOTLIN_VERSION = "1.6.10"
     const val KTOR_VERSION = "1.6.7"
     const val SHADOW_JAR_VERSION = "7.1.1"
     const val EXPOSED_VERSION = "0.36.2"
     const val POSTGRESQL_VERSION = "42.3.1"
     const val HIKARI_VESRION = "5.0.0"
     const val KOIN_VERSION = "3.1.2"
+
 
     object Jvm {
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
