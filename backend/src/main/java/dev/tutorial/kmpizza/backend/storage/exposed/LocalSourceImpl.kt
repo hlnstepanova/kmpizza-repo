@@ -5,13 +5,17 @@ import com.zaxxer.hikari.HikariDataSource
 import dev.tutorial.kmpizza.backend.model.Ingredient
 import dev.tutorial.kmpizza.backend.model.Instruction
 import dev.tutorial.kmpizza.backend.model.Recipe
+import dev.tutorial.kmpizza.backend.model.RecipeResponse
+import dev.tutorial.kmpizza.backend.storage.aws.FileStorage
+import dev.tutorial.kmpizza.backend.storage.exposed.image.RecipeImageEntity
+import dev.tutorial.kmpizza.backend.storage.exposed.image.RecipeImageTable
 import dev.tutorial.kmpizza.backend.storage.exposed.ingredient.IngredientEntity
 import dev.tutorial.kmpizza.backend.storage.exposed.ingredient.IngredientTable
 import dev.tutorial.kmpizza.backend.storage.exposed.instruction.InstructionEntity
 import dev.tutorial.kmpizza.backend.storage.exposed.instruction.InstructionTable
 import dev.tutorial.kmpizza.backend.storage.exposed.recipe.RecipeEntity
 import dev.tutorial.kmpizza.backend.storage.exposed.recipe.RecipeTable
-import dev.tutorial.kmpizza.backend.storage.exposed.recipe.toRecipe
+import dev.tutorial.kmpizza.backend.storage.exposed.recipe.toRecipeResponse
 import io.ktor.application.*
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.newFixedThreadPoolContext
@@ -19,10 +23,12 @@ import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.io.File
 import kotlin.coroutines.CoroutineContext
 
 @OptIn(ObsoleteCoroutinesApi::class)
 internal class LocalSourceImpl(
+    private val fileStorage: FileStorage,
     application: io.ktor.application.Application
 ) : LocalSource {
     private val dispatcher: CoroutineContext
@@ -48,7 +54,8 @@ internal class LocalSourceImpl(
             SchemaUtils.createMissingTablesAndColumns(
                 RecipeTable,
                 IngredientTable,
-                InstructionTable
+                InstructionTable,
+                RecipeImageTable
             )
         }
     }
@@ -102,17 +109,31 @@ internal class LocalSourceImpl(
     }
 
 
-    override suspend fun getRecipes() : List<Recipe> = withContext(dispatcher) {
+    override suspend fun getRecipes() : List<RecipeResponse> = withContext(dispatcher) {
         transaction {
-            RecipeEntity.all().map { it.toRecipe() }
+            RecipeEntity.all().map { it.toRecipeResponse() }
         }
     }
 
-    override suspend fun getRecipe(recipeId: Long): Recipe = withContext(dispatcher) {
+    override suspend fun getRecipe(recipeId: Long): RecipeResponse = withContext(dispatcher) {
         transaction {
-            RecipeEntity[recipeId.toInt()].toRecipe()
+            RecipeEntity[recipeId.toInt()].toRecipeResponse()
         }
     }
+
+    override suspend fun saveImage(recipeId: Long, image: File) {
+        withContext(dispatcher) {
+            val imageUrl = fileStorage.save(image)
+            transaction {
+                val recipe = RecipeEntity[recipeId.toInt()]
+                RecipeImageEntity.new {
+                    this.image = imageUrl
+                    this.recipe = recipe
+                }
+            }
+        }
+    }
+
 
 }
 

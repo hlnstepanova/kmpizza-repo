@@ -33,6 +33,10 @@ dependencies {
     // Koin
     implementation(Versions.Jvm.KOIN_KTOR)
 
+    // AWS
+    implementation(platform(Versions.Jvm.AWS_JAVA_SDK))
+    implementation(Versions.Jvm.AWS_S3)
+
 }
 
 tasks.withType<ShadowJar> {

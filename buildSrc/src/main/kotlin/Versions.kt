@@ -6,6 +6,7 @@ object Versions {
     const val POSTGRESQL_VERSION = "42.3.1"
     const val HIKARI_VESRION = "5.0.0"
     const val KOIN_VERSION = "3.1.2"
+    const val AWS_VERSION = "2.17.102"
 
 
     object Jvm {
@@ -20,5 +21,7 @@ object Versions {
         const val HIKARI_CONNECTION_POOL = "com.zaxxer:HikariCP:$HIKARI_VESRION"
         const val POSTGRESQL = "org.postgresql:postgresql:$POSTGRESQL_VERSION"
         const val KOIN_KTOR = "io.insert-koin:koin-ktor:$KOIN_VERSION"
+        const val AWS_JAVA_SDK = "software.amazon.awssdk:bom:$AWS_VERSION"
+        const val AWS_S3 = "software.amazon.awssdk:s3"
     }
 }
