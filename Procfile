@@ -1,0 +1,1 @@
+web: java -jar ./backend/build/libs/Backend.jar
