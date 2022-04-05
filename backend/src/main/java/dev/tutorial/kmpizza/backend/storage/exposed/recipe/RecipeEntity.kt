@@ -1,7 +1,5 @@
 package dev.tutorial.kmpizza.backend.storage.exposed.recipe
 
-import dev.tutorial.kmpizza.backend.model.Recipe
-import dev.tutorial.kmpizza.backend.model.RecipeResponse
 import dev.tutorial.kmpizza.backend.storage.exposed.image.RecipeImageEntity
 import dev.tutorial.kmpizza.backend.storage.exposed.image.RecipeImageTable
 import dev.tutorial.kmpizza.backend.storage.exposed.image.toRecipeImage
@@ -11,6 +9,7 @@ import dev.tutorial.kmpizza.backend.storage.exposed.ingredient.toIngredient
 import dev.tutorial.kmpizza.backend.storage.exposed.instruction.InstructionEntity
 import dev.tutorial.kmpizza.backend.storage.exposed.instruction.InstructionTable
 import dev.tutorial.kmpizza.backend.storage.exposed.instruction.toInstruction
+import dev.tutorial.kmpizza.model.RecipeResponse
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID

@@ -13,6 +13,7 @@ plugins {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation(project(":shared"))
 
     // Ktor
     implementation(Versions.Jvm.KTOR_CLIENT_APACHE)

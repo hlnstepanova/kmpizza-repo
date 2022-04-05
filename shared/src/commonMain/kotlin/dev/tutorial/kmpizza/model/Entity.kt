@@ -1,4 +1,4 @@
-package dev.tutorial.kmpizza.backend.model
+package dev.tutorial.kmpizza.model
 
 import kotlinx.serialization.Serializable
 

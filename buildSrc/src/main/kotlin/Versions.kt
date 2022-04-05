@@ -8,7 +8,6 @@ object Versions {
     const val KOIN_VERSION = "3.1.2"
     const val AWS_VERSION = "2.17.102"
 
-
     object Jvm {
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
         const val KTOR_WEB_SOCKETS = "io.ktor:ktor-websockets:$KTOR_VERSION"
@@ -24,4 +23,21 @@ object Versions {
         const val AWS_JAVA_SDK = "software.amazon.awssdk:bom:$AWS_VERSION"
         const val AWS_S3 = "software.amazon.awssdk:s3"
     }
+
+    object Common {
+        const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
+        const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
+        const val KTOR_LOGGING = "io.ktor:ktor-client-logging:$KTOR_VERSION"
+        const val KTOR_CLIENT_SERIALIZATION = "io.ktor:ktor-client-serialization:$KTOR_VERSION"
+    }
+
+    object Android {
+        const val KTOR_CLIENT = "io.ktor:ktor-client-android:$KTOR_VERSION"
+        const val KTOR_OKHTTP = "io.ktor:ktor-client-okhttp:$KTOR_VERSION"
+    }
+
+    object iOS {
+        const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
+    }
+
 }
