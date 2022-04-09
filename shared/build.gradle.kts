@@ -51,6 +51,7 @@ kotlin {
             dependencies {
                 implementation(Versions.Android.KTOR_CLIENT)
                 implementation(Versions.Android.KTOR_OKHTTP)
+                implementation(Versions.Android.VIEW_MODEL)
             }
         }
 

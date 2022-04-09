@@ -7,6 +7,7 @@ object Versions {
     const val HIKARI_VESRION = "5.0.0"
     const val KOIN_VERSION = "3.1.2"
     const val AWS_VERSION = "2.17.102"
+    const val LIFECYCLE_VERSION = "2.4.1"
 
     object Jvm {
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
@@ -34,6 +35,7 @@ object Versions {
     object Android {
         const val KTOR_CLIENT = "io.ktor:ktor-client-android:$KTOR_VERSION"
         const val KTOR_OKHTTP = "io.ktor:ktor-client-okhttp:$KTOR_VERSION"
+        const val VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_VERSION"
     }
 
     object iOS {
