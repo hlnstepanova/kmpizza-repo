@@ -5,17 +5,25 @@ plugins {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+
+    implementation(Versions.Android.COMPOSE_UI)
+    implementation(Versions.Android.COMPOSE_GRAPHICS)
+    implementation(Versions.Android.COMPOSE_TOOLING)
+    implementation(Versions.Android.COMPOSE_FOUNDATION)
+    implementation(Versions.Android.COMPOSE_MATERIAL)
+    implementation(Versions.Android.COMPOSE_NAVIGATION)
+    implementation(Versions.Android.COMPOSE_ACTIVITY)
+
+    implementation(Versions.Android.MATERIAL_COMPONENTS)
 }
 
+
 android {
-    compileSdkVersion(31)
+    compileSdk = 32
     defaultConfig {
         applicationId = "dev.tutorial.kmpizza.android"
-        minSdkVersion(21)
-        targetSdkVersion(31)
+        minSdk = 21
+        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
     }
@@ -24,4 +32,12 @@ android {
             isMinifyEnabled = false
         }
     }
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.1"
+    }
+
 }

@@ -8,6 +8,10 @@ object Versions {
     const val KOIN_VERSION = "3.1.2"
     const val AWS_VERSION = "2.17.102"
     const val LIFECYCLE_VERSION = "2.4.1"
+    const val COMPOSE = "1.1.1"
+    const val COMPOSE_ACT = "1.6.0-alpha01"
+    const val COMPOSE_NAV = "2.5.0-alpha03"
+    const val MATERIAL = "1.5.0"
 
     object Jvm {
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
@@ -36,6 +40,17 @@ object Versions {
         const val KTOR_CLIENT = "io.ktor:ktor-client-android:$KTOR_VERSION"
         const val KTOR_OKHTTP = "io.ktor:ktor-client-okhttp:$KTOR_VERSION"
         const val VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_VERSION"
+
+        // Compose
+        const val COMPOSE_UI = "androidx.compose.ui:ui:$COMPOSE"
+        const val COMPOSE_GRAPHICS = "androidx.compose.ui:ui-graphics:$COMPOSE"
+        const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling:$COMPOSE"
+        const val COMPOSE_FOUNDATION = "androidx.compose.foundation:foundation-layout:$COMPOSE"
+        const val COMPOSE_MATERIAL = "androidx.compose.material:material:$COMPOSE"
+        const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:$COMPOSE_NAV"
+        const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:$COMPOSE_ACT"
+
+        const val MATERIAL_COMPONENTS = "com.google.android.material:material:$MATERIAL"
     }
 
     object iOS {

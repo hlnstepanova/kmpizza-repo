@@ -22,7 +22,7 @@ class RecipeViewModel (private val recipeRemoteSource: RecipeRemoteSource) : Cor
             _recipes.value = recipeRemoteSource.getRecipes()
         }
     }
- 
+
     fun observeRecipes(onChange: (List<RecipeResponse>) -> Unit) {
         recipes.onEach {
             onChange(it)

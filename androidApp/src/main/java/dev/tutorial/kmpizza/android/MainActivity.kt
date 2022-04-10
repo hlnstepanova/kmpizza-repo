@@ -1,20 +1,24 @@
 package dev.tutorial.kmpizza.android
-
-import androidx.appcompat.app.AppCompatActivity
+ 
 import android.os.Bundle
-import dev.tutorial.kmpizza.Greeting
-import android.widget.TextView
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material.MaterialTheme
+import dev.tutorial.kmpizza.android.ui.MainScreen
+import dev.tutorial.kmpizza.api.KtorApiImpl
+import dev.tutorial.kmpizza.api.RecipesApi
+import dev.tutorial.kmpizza.remote.RecipeRemoteSource
 
-fun greet(): String {
-    return Greeting().greeting()
-}
+class MainActivity : ComponentActivity() {
+    val recipeRemoteSource = RecipeRemoteSource(RecipesApi(KtorApiImpl()))
 
-class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        setContent {
+            MaterialTheme {
+                MainScreen(recipeRemoteSource = recipeRemoteSource)
+            }
+        }
     }
 }
+
