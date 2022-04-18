@@ -15,8 +15,9 @@ dependencies {
     implementation(Versions.Android.COMPOSE_ACTIVITY)
 
     implementation(Versions.Android.MATERIAL_COMPONENTS)
-}
 
+    implementation(Versions.Android.KOIN_ANDROID_MAIN)
+}
 
 android {
     compileSdk = 32
@@ -39,5 +40,4 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.1.1"
     }
-
 }

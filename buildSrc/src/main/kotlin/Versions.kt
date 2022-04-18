@@ -34,6 +34,8 @@ object Versions {
         const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
         const val KTOR_LOGGING = "io.ktor:ktor-client-logging:$KTOR_VERSION"
         const val KTOR_CLIENT_SERIALIZATION = "io.ktor:ktor-client-serialization:$KTOR_VERSION"
+
+        const val KOIN_CORE = "io.insert-koin:koin-core:$KOIN_VERSION"
     }
 
     object Android {
@@ -51,10 +53,11 @@ object Versions {
         const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:$COMPOSE_ACT"
 
         const val MATERIAL_COMPONENTS = "com.google.android.material:material:$MATERIAL"
+
+        const val KOIN_ANDROID_MAIN = "io.insert-koin:koin-android:$KOIN_VERSION"
     }
 
     object iOS {
         const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
     }
-
 }

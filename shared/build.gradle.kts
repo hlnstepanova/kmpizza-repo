@@ -37,6 +37,9 @@ kotlin {
                 implementation(Versions.Common.KTOR_LOGGING)
                 implementation(Versions.Common.KTOR_CLIENT_JSON)
                 implementation(Versions.Common.KTOR_CLIENT_SERIALIZATION)
+
+                // Koin
+                api(Versions.Common.KOIN_CORE)
             }
         }
 
