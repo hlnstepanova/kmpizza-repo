@@ -32,3 +32,5 @@ private val repositoryModule = module {
     factory { RecipeRemoteSource(get()) }
     single { RecipeRepository() }
 }
+
+fun initKoin() = initKoin {}
