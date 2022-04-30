@@ -2,10 +2,10 @@ package dev.tutorial.kmpizza.backend.storage.exposed
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import dev.tutorial.kmpizza.backend.model.Ingredient
-import dev.tutorial.kmpizza.backend.model.Instruction
-import dev.tutorial.kmpizza.backend.model.Recipe
-import dev.tutorial.kmpizza.backend.model.RecipeResponse
+import dev.tutorial.kmpizza.model.Ingredient
+import dev.tutorial.kmpizza.model.Instruction
+import dev.tutorial.kmpizza.model.Recipe
+import dev.tutorial.kmpizza.model.RecipeResponse
 import dev.tutorial.kmpizza.backend.storage.aws.FileStorage
 import dev.tutorial.kmpizza.backend.storage.exposed.image.RecipeImageEntity
 import dev.tutorial.kmpizza.backend.storage.exposed.image.RecipeImageTable
