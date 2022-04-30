@@ -5,7 +5,7 @@ object Versions {
     const val EXPOSED_VERSION = "0.36.2"
     const val POSTGRESQL_VERSION = "42.3.1"
     const val HIKARI_VESRION = "5.0.0"
-    const val KOIN_VERSION = "3.1.2"
+    const val KOIN_VERSION = "3.2.0-beta-1"
     const val AWS_VERSION = "2.17.102"
 
     object Jvm {
