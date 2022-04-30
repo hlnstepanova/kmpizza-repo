@@ -1,6 +1,5 @@
 package dev.tutorial.kmpizza.backend
 
-import dev.tutorial.kmpizza.backend.model.Recipe
 import dev.tutorial.kmpizza.backend.storage.exposed.LocalSource
 import dev.tutorial.kmpizza.backend.utils.toFile
 import io.ktor.application.*

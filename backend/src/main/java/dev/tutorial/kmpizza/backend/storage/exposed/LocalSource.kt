@@ -1,9 +1,9 @@
 package dev.tutorial.kmpizza.backend.storage.exposed
 
-import dev.tutorial.kmpizza.backend.model.Ingredient
-import dev.tutorial.kmpizza.backend.model.Instruction
-import dev.tutorial.kmpizza.backend.model.Recipe
-import dev.tutorial.kmpizza.backend.model.RecipeResponse
+import dev.tutorial.kmpizza.model.Ingredient
+import dev.tutorial.kmpizza.model.Instruction
+import dev.tutorial.kmpizza.model.Recipe
+import dev.tutorial.kmpizza.model.RecipeResponse
 import java.io.File
 
 internal interface LocalSource {
