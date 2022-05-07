@@ -12,6 +12,7 @@ object Versions {
     const val COMPOSE_ACT = "1.6.0-alpha01"
     const val COMPOSE_NAV = "2.5.0-alpha03"
     const val MATERIAL = "1.5.0"
+    const val COIL = "2.0.0-rc03"
 
     object Jvm {
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
@@ -51,6 +52,7 @@ object Versions {
         const val COMPOSE_MATERIAL = "androidx.compose.material:material:$COMPOSE"
         const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:$COMPOSE_NAV"
         const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:$COMPOSE_ACT"
+        const val COMPOSE_COIL = "io.coil-kt:coil-compose:$COIL"
 
         const val MATERIAL_COMPONENTS = "com.google.android.material:material:$MATERIAL"
 

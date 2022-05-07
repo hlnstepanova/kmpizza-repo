@@ -13,6 +13,7 @@ dependencies {
     implementation(Versions.Android.COMPOSE_MATERIAL)
     implementation(Versions.Android.COMPOSE_NAVIGATION)
     implementation(Versions.Android.COMPOSE_ACTIVITY)
+    implementation(Versions.Android.COMPOSE_COIL)
 
     implementation(Versions.Android.MATERIAL_COMPONENTS)
 
