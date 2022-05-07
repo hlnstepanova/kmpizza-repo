@@ -1,5 +1,6 @@
 package dev.tutorial.kmpizza.android.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,24 +20,26 @@ import dev.tutorial.kmpizza.model.RecipeResponse
 import dev.tutorial.kmpizza.viewmodel.RecipeViewModel
 
 @Composable
-public fun RecipesScreen() {
+public fun RecipesScreen(onRecipeClicked: (RecipeResponse) -> Unit) {
     val viewModel = remember {
         RecipeViewModel()
     }
     val recipes by viewModel.recipes.collectAsState()
 
-    Recipes(items = recipes)
+    Recipes(items = recipes, onRecipeClicked = onRecipeClicked)
 }
 
 @Composable
 fun Recipes(
-    items: List<RecipeResponse>
+    items: List<RecipeResponse>,
+    onRecipeClicked: (RecipeResponse) -> Unit
+
 ) {
     LazyColumn {
         itemsIndexed(
             items = items,
             itemContent = { _, item ->
-                RecipeListItem(recipe = item)
+                RecipeListItem(recipe = item, onRecipeClicked = onRecipeClicked)
             }
         )
     }
@@ -44,12 +47,16 @@ fun Recipes(
 
 @Composable
 fun RecipeListItem(
-    recipe: RecipeResponse
+    recipe: RecipeResponse,
+    onRecipeClicked: (RecipeResponse) -> Unit
 ) {
     val placeholder = "https://m.media-amazon.com/images/I/413qxEF0QPL._AC_.jpg"
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.height(128.dp)
+        modifier = Modifier
+            .height(128.dp)
+            .clickable { onRecipeClicked(recipe) }
+
     ) {
         AsyncImage(
             modifier = Modifier.padding(8.dp),
@@ -68,7 +75,7 @@ fun RecipeListItemPreview(
 ) {
     val title = "Best Dish in the World"
     val recipe = RecipeResponse(id = 0, title = title, listOf(), listOf(), listOf())
-    RecipeListItem(recipe)
+    RecipeListItem(recipe) {}
 }
 
 
