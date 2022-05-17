@@ -41,7 +41,7 @@ kotlin {
                 implementation(Versions.Common.KTOR_CLIENT_CONTENT_NEGOTIATION)
 
                 // Koin
-                api(Versions.Common.KOIN_CORE)
+                implementation(Versions.Common.KOIN_CORE)
             }
         }
 

@@ -2,13 +2,15 @@ package dev.tutorial.kmpizza.backend
 
 import dev.tutorial.kmpizza.backend.di.getKoinModule
 import dev.tutorial.kmpizza.backend.storage.exposed.LocalSource
-import io.ktor.application.*
-import io.ktor.features.*
-import io.ktor.response.*
-import io.ktor.routing.*
 import io.ktor.serialization.*
-import org.koin.ktor.ext.Koin
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.application.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.plugins.statuspages.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
+import org.koin.ktor.plugin.Koin
 
 internal fun Application.module() {
     install(Koin) {
@@ -22,7 +24,7 @@ internal fun Application.module() {
     }
 
     install(StatusPages) {
-        exception<Throwable> { cause ->
+        exception<Throwable> { call, cause ->
             call.respond(cause.toString())
         }
     }

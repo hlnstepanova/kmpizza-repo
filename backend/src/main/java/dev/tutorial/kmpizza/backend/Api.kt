@@ -2,13 +2,13 @@ package dev.tutorial.kmpizza.backend
 
 import dev.tutorial.kmpizza.backend.storage.exposed.LocalSource
 import dev.tutorial.kmpizza.backend.utils.toFile
-import io.ktor.application.*
-import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.http.content.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.plugins.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import java.io.File
 
 internal fun Routing.api(localSource: LocalSource) {

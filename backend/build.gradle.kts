@@ -18,6 +18,8 @@ dependencies {
     // Ktor
     implementation(Versions.Jvm.KTOR_CLIENT_APACHE)
     implementation(Versions.Jvm.KTOR_SERIALIZATION)
+    implementation(Versions.Jvm.KTOR_SERVER_CONTENT_NEGOTIATION)
+    implementation(Versions.Jvm.KTOR_STATUS_PAGES)
     implementation(Versions.Jvm.KTOR_SERVER_NETTY)
     implementation(Versions.Jvm.KTOR_AUTH)
     implementation(Versions.Jvm.KTOR_WEB_SOCKETS)

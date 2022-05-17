@@ -4,7 +4,7 @@ import dev.tutorial.kmpizza.backend.storage.aws.AmazonFileStorage
 import dev.tutorial.kmpizza.backend.storage.aws.FileStorage
 import dev.tutorial.kmpizza.backend.storage.exposed.LocalSource
 import dev.tutorial.kmpizza.backend.storage.exposed.LocalSourceImpl
-import io.ktor.application.*
+import io.ktor.server.application.*
 import org.koin.dsl.module
 
 internal fun Application.getKoinModule() = module {

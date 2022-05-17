@@ -16,7 +16,7 @@ import dev.tutorial.kmpizza.backend.storage.exposed.instruction.InstructionTable
 import dev.tutorial.kmpizza.backend.storage.exposed.recipe.RecipeEntity
 import dev.tutorial.kmpizza.backend.storage.exposed.recipe.RecipeTable
 import dev.tutorial.kmpizza.backend.storage.exposed.recipe.toRecipeResponse
-import io.ktor.application.*
+import io.ktor.server.application.*
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.newFixedThreadPoolContext
 import kotlinx.coroutines.withContext
@@ -29,7 +29,7 @@ import kotlin.coroutines.CoroutineContext
 @OptIn(ObsoleteCoroutinesApi::class)
 internal class LocalSourceImpl(
     private val fileStorage: FileStorage,
-    application: io.ktor.application.Application
+    application: Application
 ) : LocalSource {
     private val dispatcher: CoroutineContext
 
