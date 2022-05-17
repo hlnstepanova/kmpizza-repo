@@ -1,6 +1,6 @@
 object Versions {
     const val KOTLIN_VERSION = "1.6.10"
-    const val KTOR_VERSION = "1.6.7"
+    const val KTOR_VERSION = "2.0.1"
     const val SHADOW_JAR_VERSION = "7.1.1"
     const val EXPOSED_VERSION = "0.36.2"
     const val POSTGRESQL_VERSION = "42.3.1"
@@ -15,7 +15,7 @@ object Versions {
     const val COIL = "2.0.0-rc03"
 
     object Jvm {
-        const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
+        const val KTOR_AUTH = "io.ktor:ktor-server-auth:$KTOR_VERSION"
         const val KTOR_WEB_SOCKETS = "io.ktor:ktor-websockets:$KTOR_VERSION"
         const val KTOR_CLIENT_APACHE = "io.ktor:ktor-client-apache:$KTOR_VERSION"
         const val KTOR_SERVER_NETTY = "io.ktor:ktor-server-netty:$KTOR_VERSION"
@@ -32,9 +32,10 @@ object Versions {
 
     object Common {
         const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
-        const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
         const val KTOR_LOGGING = "io.ktor:ktor-client-logging:$KTOR_VERSION"
-        const val KTOR_CLIENT_SERIALIZATION = "io.ktor:ktor-client-serialization:$KTOR_VERSION"
+
+        const val KTOR_CLIENT_CONTENT_NEGOTIATION = "io.ktor:ktor-client-content-negotiation:$KTOR_VERSION"
+        const val KTOR_CLIENT_SERIALIZATION = "io.ktor:ktor-serialization-kotlinx-json:$KTOR_VERSION"
 
         const val KOIN_CORE = "io.insert-koin:koin-core:$KOIN_VERSION"
     }
