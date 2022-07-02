@@ -11,10 +11,14 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
+import org.koin.logger.slf4jLogger
 import org.slf4j.event.Level
+
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 internal fun Application.module() {
     install(Koin) {
+        slf4jLogger()
         modules(getKoinModule())
     }
 

@@ -38,6 +38,7 @@ dependencies {
 
     // Koin
     implementation(Versions.Jvm.KOIN_KTOR)
+    implementation(Versions.Jvm.KOIN_KTOR_LOGGER)
 
     // AWS
     implementation(platform(Versions.Jvm.AWS_JAVA_SDK))

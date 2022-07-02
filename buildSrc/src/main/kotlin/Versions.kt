@@ -13,7 +13,7 @@ object Versions {
     const val COMPOSE_NAV = "2.5.0-alpha03"
     const val MATERIAL = "1.5.0"
     const val COIL = "2.0.0-rc03"
-    const val SLF4J_VERSION = "2.14.1"
+    const val SLF4J_VERSION = "2.17.2"
 
     object Jvm {
         const val KTOR_AUTH = "io.ktor:ktor-server-auth:$KTOR_VERSION"
@@ -31,6 +31,7 @@ object Versions {
         const val HIKARI_CONNECTION_POOL = "com.zaxxer:HikariCP:$HIKARI_VESRION"
         const val POSTGRESQL = "org.postgresql:postgresql:$POSTGRESQL_VERSION"
         const val KOIN_KTOR = "io.insert-koin:koin-ktor:$KOIN_VERSION"
+        const val KOIN_KTOR_LOGGER = "io.insert-koin:koin-logger-slf4j:$KOIN_VERSION"
         const val AWS_JAVA_SDK = "software.amazon.awssdk:bom:$AWS_VERSION"
         const val AWS_S3 = "software.amazon.awssdk:s3"
     }
