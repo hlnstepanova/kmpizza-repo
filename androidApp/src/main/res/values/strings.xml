@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Name</string>
+    <string name="amount">Amount</string>
+    <string name="metric">Metric</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
+    <string name="title">What is the name of this dish?</string>
+</resources>

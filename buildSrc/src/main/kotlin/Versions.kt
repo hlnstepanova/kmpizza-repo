@@ -1,5 +1,5 @@
 object Versions {
-    const val KOTLIN_VERSION = "1.6.10"
+    const val KOTLIN_VERSION = "1.6.21"
     const val KTOR_VERSION = "2.0.3"
     const val SHADOW_JAR_VERSION = "7.1.1"
     const val EXPOSED_VERSION = "0.36.2"
@@ -8,7 +8,7 @@ object Versions {
     const val KOIN_VERSION = "3.2.0"
     const val AWS_VERSION = "2.17.102"
     const val LIFECYCLE_VERSION = "2.4.1"
-    const val COMPOSE = "1.1.1"
+    const val COMPOSE = "1.2.0-beta01"
     const val COMPOSE_ACT = "1.6.0-alpha01"
     const val COMPOSE_NAV = "2.5.0-alpha03"
     const val MATERIAL = "1.5.0"
