@@ -1,7 +1,6 @@
 package dev.tutorial.kmpizza.viewmodel
 
 import dev.tutorial.kmpizza.model.RecipeResponse
-import dev.tutorial.kmpizza.remote.RecipeRemoteSource
 import dev.tutorial.kmpizza.repository.RecipeRepository
 import dev.tutorial.kmpizza.util.CoroutineViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

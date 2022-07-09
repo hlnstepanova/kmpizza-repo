@@ -4,7 +4,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import dev.tutorial.kmpizza.model.Ingredient
 import dev.tutorial.kmpizza.model.Instruction
-import dev.tutorial.kmpizza.model.Recipe
+import dev.tutorial.kmpizza.model.RecipeRequest
 import dev.tutorial.kmpizza.model.RecipeResponse
 import dev.tutorial.kmpizza.backend.storage.aws.FileStorage
 import dev.tutorial.kmpizza.backend.storage.exposed.image.RecipeImageEntity
@@ -87,19 +87,19 @@ internal class LocalSourceImpl(
         }
     }
 
-    override suspend fun addRecipe(recipe: Recipe) = withContext(dispatcher) {
+    override suspend fun addRecipe(recipeRequest: RecipeRequest) = withContext(dispatcher) {
         withContext(dispatcher) {
             val recipeId = transaction {
                 RecipeEntity.new {
-                    title = recipe.title
+                    title = recipeRequest.title
                 }.id.value.toLong()
             }
 
-            recipe.ingredients.forEach{
+            recipeRequest.ingredients.forEach{
                 addIngredient(recipeId, it)
             }
 
-            recipe.instructions.forEach{
+            recipeRequest.instructions.forEach{
                 addInstruction(recipeId, it)
             }
 

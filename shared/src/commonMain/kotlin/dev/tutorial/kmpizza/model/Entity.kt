@@ -3,8 +3,8 @@ package dev.tutorial.kmpizza.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Recipe(
-    val id: Long = 0,
+data class RecipeRequest(
+    val id: Long? = 0,
     val title: String,
     val ingredients: List<Ingredient>,
     val instructions: List<Instruction>
@@ -12,7 +12,7 @@ data class Recipe(
 
 @Serializable
 data class Ingredient(
-    val id: Long = 0,
+    val id: Long? = 0,
     val name: String,
     val amount: Double,
     val metric: String
@@ -20,14 +20,14 @@ data class Ingredient(
 
 @Serializable
 data class Instruction(
-    val id: Long = 0,
+    val id: Long? = 0,
     val order: Int,
     val description: String,
 )
 
 @Serializable
 data class RecipeImage(
-    val id: Long = 0,
+    val id: Long? = 0,
     val image: String
 )
 

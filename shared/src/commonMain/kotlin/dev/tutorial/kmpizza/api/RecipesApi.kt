@@ -1,10 +1,9 @@
 package dev.tutorial.kmpizza.api
 
-import dev.tutorial.kmpizza.model.Recipe
+import dev.tutorial.kmpizza.model.RecipeRequest
 import dev.tutorial.kmpizza.model.RecipeResponse
 import io.ktor.client.call.*
 import io.ktor.client.request.*
-import kotlin.collections.get
 
 class RecipesApi(private val ktorApi: KtorApi) : KtorApi by ktorApi {
     companion object {
@@ -29,11 +28,17 @@ class RecipesApi(private val ktorApi: KtorApi) : KtorApi by ktorApi {
         }.body()
     }
 
-    suspend fun postRecipe(recipe: Recipe): Long {
-        return client.post {
-            json()
-            apiUrl(RECIPES_BASE_URL)
-        }.body()
+    suspend fun postRecipe(recipeRequest: RecipeRequest): Long? {
+        try{
+            return client.post {
+                json()
+                apiUrl(RECIPES_BASE_URL)
+                setBody(recipeRequest)
+            }.body()
+        } catch (e: Exception){
+            return null
+        }
     }
+
 
 }
