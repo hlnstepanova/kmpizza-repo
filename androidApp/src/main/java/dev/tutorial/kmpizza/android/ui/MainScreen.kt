@@ -22,17 +22,25 @@ public fun MainScreen() {
             composable(Navigation.Recipes.route) {
                 RecipesScreen(
                     onRecipeClicked =
-                    { navController.navigate("${Navigation.RecipeDetail.route}/${it.id}") }
+                    { navController.navigate("${Navigation.RecipeDetails.route}/${it.id}") },
+                    onAddRecipe = { navController.navigate("recipeDetails") }
                 )
             }
             composable(
-                "${Navigation.RecipeDetail.route}/{id}",
+                "${Navigation.RecipeDetails.route}/{id}",
                 arguments = listOf(navArgument("id") { type = NavType.LongType })
             ) {
-                RecipeDetailScreen(
+                RecipeDetailsScreen(
                     recipeId = it.arguments!!.getLong("id"),
                     upPress = { navController.popBackStack() })
             }
+            composable(
+                Navigation.RecipeDetails.route
+            ) {
+                RecipeDetailsScreen(
+                    upPress = { navController.popBackStack() })
+            }
+
         })
 }
 

@@ -2,6 +2,7 @@ package dev.tutorial.kmpizza.android.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -14,27 +15,33 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import dev.tutorial.kmpizza.android.R
+import dev.tutorial.kmpizza.android.ui.utils.TopBar
 import dev.tutorial.kmpizza.model.Ingredient
 import dev.tutorial.kmpizza.model.Instruction
 import dev.tutorial.kmpizza.viewmodel.RecipeViewModel
 
 @Composable
-public fun RecipeDetailScreen(recipeId: Long, upPress: () -> Unit) {
+public fun RecipeDetailsScreen(recipeId: Long? = null, upPress: () -> Unit) {
     val viewModel = remember { RecipeViewModel() }
     val recipes by viewModel.recipes.collectAsState()
     val recipe = recipes.find { it.id == recipeId }
     val placeholder = "https://m.media-amazon.com/images/I/413qxEF0QPL._AC_.jpg"
 
-    Column(
-        modifier = Modifier.padding(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        HeaderImage(image = placeholder)
-        recipe?.let { Title(it.title) }
-        SectionHeader(title = "Ingredients")
-        recipe?.let { Ingredients(it.ingredients) }
-        SectionHeader(title = "Instructions")
-        recipe?.let { Instructions(it.instructions) }
+    Scaffold(
+        topBar = { TopBar(upPress = upPress) }
+    )
+    {
+        Column(
+            modifier = Modifier.padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            HeaderImage(image = placeholder)
+            recipe?.let { Title(it.title) }
+            SectionHeader(title = "Ingredients")
+            recipe?.let { Ingredients(it.ingredients) }
+            SectionHeader(title = "Instructions")
+            recipe?.let { Instructions(it.instructions) }
+        }
     }
 }
 
