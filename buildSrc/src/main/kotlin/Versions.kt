@@ -14,6 +14,7 @@ object Versions {
     const val MATERIAL = "1.5.0"
     const val COIL = "2.0.0-rc03"
     const val SLF4J_VERSION = "2.17.2"
+    const val COROUTINES_MT = "1.6.3-native-mt"
 
     object Jvm {
         const val KTOR_AUTH = "io.ktor:ktor-server-auth:$KTOR_VERSION"
@@ -44,6 +45,8 @@ object Versions {
         const val KTOR_CLIENT_SERIALIZATION = "io.ktor:ktor-serialization-kotlinx-json:$KTOR_VERSION"
 
         const val KOIN_CORE = "io.insert-koin:koin-core:$KOIN_VERSION"
+
+        const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINES_MT"
     }
 
     object Android {

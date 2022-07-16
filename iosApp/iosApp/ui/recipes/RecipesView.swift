@@ -19,7 +19,7 @@ struct RecipesView: View {
     
     var body: some View {
             List(state.recipes, id: \.id) { recipe in
-                    Text(recipe.title)
+                RecipeView(item: recipe)
             }
             .listStyle(PlainListStyle())
     }

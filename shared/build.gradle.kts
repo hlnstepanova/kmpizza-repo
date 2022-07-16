@@ -42,6 +42,13 @@ kotlin {
 
                 // Koin
                 implementation(Versions.Common.KOIN_CORE)
+
+                // Coroutines
+                implementation(Versions.Common.COROUTINES) {
+                    version {
+                        strictly(Versions.COROUTINES_MT)
+                    }
+                }
             }
         }
 
