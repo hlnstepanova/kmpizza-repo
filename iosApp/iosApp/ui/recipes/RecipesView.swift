@@ -8,9 +8,9 @@
 
 import SwiftUI
 import shared
- 
+
 struct RecipesView: View {
-     
+    
     @ObservedObject var state: RecipesState
     
     init() {
@@ -18,10 +18,11 @@ struct RecipesView: View {
     }
     
     var body: some View {
-            List(state.recipes, id: \.id) { recipe in
+        List(state.recipes, id: \.id) { recipe in
+            NavigationLink(destination: RecipeDetailView (id: recipe.id.toKotlinLong())) {
                 RecipeView(item: recipe)
             }
-            .listStyle(PlainListStyle())
+        }.listStyle(PlainListStyle())
     }
 }
 
