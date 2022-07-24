@@ -27,6 +27,10 @@ class RecipeDetailState: ObservableObject{
         }
     }
     
+    func saveRecipe(){
+        viewModel.saveRecipe()
+    }
+    
     deinit {
         viewModel.dispose()
     }

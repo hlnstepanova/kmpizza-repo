@@ -12,6 +12,8 @@ import Kingfisher
 
 struct RecipeDetailView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     let recipeId: KotlinLong?
     @ObservedObject var state: RecipeDetailState
     
@@ -22,49 +24,200 @@ struct RecipeDetailView: View {
     
     var body: some View {
         ScrollView {
-            Text(state.recipe?.title ?? "")
-                .font(.headline)
             KFImage(URL(string: "https://m.media-amazon.com/images/I/413qxEF0QPL._AC_.jpg"))
                 .resizable()
-                .frame(width: 180, height: 150)
-                .padding(.trailing)
+                .frame(width: 200, height: 150)
+            
+            if (recipeId != nil) {
+                Text(state.recipe?.title ?? "")
+                    .font(.headline)
+                    .padding()
+            } else {
+                TextField("What is the name of this dish?", text: Binding(
+                    get: { state.recipe?.title ?? "" },
+                    set: { state.viewModel.onTitleChanged(title: $0) }
+                ))
+                .multilineTextAlignment(.center)
+                .padding()
+            }
             
             Text("Ingredients")
                 .font(.subheadline)
-            LazyVStack {
-                ForEach(state.recipe?.ingredients ?? [], id: \.id, content: { ingredient in
-                    HStack {
-                        Text(ingredient.name)
-                            .font(.body)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        HStack {
-                            Text("\(ingredient.amount, specifier: "%.1f")")
-                            Text(ingredient.metric)
-                                .font(.body)
-                        }
-                    }
-                    
-                })
+            if (recipeId != nil) {
+                
+                Ingredients(ingredients: state.recipe?.ingredients)
+            } else {
+                EditIngredients(ingredients: state.recipe?.ingredients, viewModel: state.viewModel )
             }
-            .padding()
             
             Text("Instructions")
                 .font(.subheadline)
-            LazyVStack {
-                ForEach(state.recipe?.instructions ?? [], id: \.id, content: { instruction in
-                    HStack {
-                        Text("\(instruction.order). ")
-                            .font(.body)
-                        Text(instruction.description_)
-                            .font(.body)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .padding()
+            if (recipeId != nil) {
+                Instructions(instructions: state.recipe?.instructions)
+            } else {
+                EditInstructions(instructions: state.recipe?.instructions, viewModel: state.viewModel )
+            }
+            
+            if (recipeId == nil) {
+                Button("Save recipe") {
+                    state.saveRecipe()
+                    presentationMode.wrappedValue.dismiss()
+                }
+                .buttonStyle(FilledButtonStyle())
+                .padding()
+            }
+            
+        }.padding()
+      
+    }
+}
+
+struct AddButton: View {
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: "plus.circle.fill")
+                .resizable()
+                .frame(width: 30, height: 30)
+                .foregroundColor(Color.accentColor)
+                .shadow(color: .gray, radius: 0.2, x: 1, y: 1)
+        }.padding()
+    }
+}
+
+struct Ingredients: View {
+    
+    var ingredients: [Ingredient]?
+    
+    var body: some View {
+        LazyVStack {
+            ForEach(ingredients ?? [], id: \.self, content: { ingredient in
+                HStack {
+                    Text(ingredient.name)
+                        .font(.body)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
-                })
+                    HStack {
+                        Text("\(ingredient.amount, specifier: "%.1f")")
+                        Text(ingredient.metric)
+                            .font(.body)
+                    }
+                }
+                
+            })
+        }
+        .padding()
+    }
+}
+
+struct Instructions: View {
+    
+    var instructions: [Instruction]?
+    
+    var body: some View {
+        LazyVStack {
+            ForEach(instructions ?? [], id: \.order, content: { instruction in
+                HStack {
+                    Text("\(instruction.order). ")
+                        .font(.body)
+                    Text(instruction.description_)
+                        .font(.body)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            })
+        }
+    }
+}
+
+struct EditIngredients: View {
+    
+    var ingredients: [Ingredient]?
+    var viewModel: RecipeDetailsViewModel
+    
+    @State private var name: String = ""
+    @State private var amount: Double? = nil
+    @State private var metric: String = ""
+    
+    
+    var body: some View {
+        let amountBinding = Binding<Double?>(
+            get: {
+                if (amount==0.0 && name=="") {
+                    amount = nil
+                }
+                return amount
+            },
+            set: { newValue in amount = (name=="" && metric=="") ? newValue : newValue ?? 0.0 }
+        )
+        
+        Ingredients(ingredients: ingredients)
+        
+        HStack {
+            TextField("Ingredient", text: $name)
+                .font(.body)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            HStack {
+                TextField("Amount", value: amountBinding, formatter: NumberFormatter())
+                TextField("Metric", text: $metric)
+                    .font(.body)
             }
         }
         
+        
+        AddButton(action: {
+            viewModel.onIngredientsChanged(ingredient: Ingredient(id: nil, name: name, amount: amount ?? 0.0, metric: metric))
+            name = ""
+            amount = nil
+            metric = ""
+        })
+        .padding()
+        
+    }
+}
+
+struct EditInstructions: View {
+    
+    var instructions: [Instruction]?
+    var viewModel: RecipeDetailsViewModel
+    
+    @State private var description: String = ""
+    
+    
+    var body: some View {
+        
+        Instructions(instructions: instructions)
+        
+        HStack {
+            Text ("\((instructions?.count ?? 0) + 1). ")
+                .font(.body)
+            TextField("Description", text: $description)
+                .font(.body)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+        }
+        
+        
+        AddButton(action: {
+            viewModel.onInstructionsChanged(instruction: Instruction(id: nil, order: Int32((instructions?.count ?? 0) + 1), description: description))
+            description = ""
+        })
+        
+        .padding()
+    }
+}
+
+struct FilledButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration
+            .label
+            .font(.title3)
+            .foregroundColor(.white)
+            .padding(.horizontal)
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity)
+            .background(configuration.isPressed ? Color.blue.opacity(0.3) : Color.blue)
+            .cornerRadius(25)
     }
 }
