@@ -1,4 +1,3 @@
 package dev.tutorial.kmpizza.util
 
-class Log {
-}
+expect val log: (String) -> Unit

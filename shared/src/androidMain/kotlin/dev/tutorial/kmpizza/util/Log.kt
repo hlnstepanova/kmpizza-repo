@@ -1,4 +1,7 @@
 package dev.tutorial.kmpizza.util
 
-class Log {
+import android.util.Log
+
+actual val log: (String) -> Unit = {
+    Log.d("RecipesLog", it)
 }

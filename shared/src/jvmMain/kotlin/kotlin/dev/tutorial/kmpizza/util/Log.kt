@@ -1,4 +1,3 @@
-package kotlin.dev.tutorial.kmpizza.util
+package dev.tutorial.kmpizza.util
 
-class Log {
-}
+actual val log: (String) -> Unit = { }

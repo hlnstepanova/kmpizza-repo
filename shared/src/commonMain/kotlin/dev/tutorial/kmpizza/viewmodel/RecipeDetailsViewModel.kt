@@ -3,6 +3,7 @@ package dev.tutorial.kmpizza.viewmodel
 import dev.tutorial.kmpizza.model.*
 import dev.tutorial.kmpizza.repository.RecipeRepository
 import dev.tutorial.kmpizza.util.CoroutineViewModel
+import dev.tutorial.kmpizza.util.log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -41,7 +42,9 @@ class RecipeDetailsViewModel(private val id: Long?) : CoroutineViewModel(), Koin
         coroutineScope.launch {
             recipe.value?.let {
                 if (it.title.isNotEmpty() && it.ingredients.isNotEmpty() && it.instructions.isNotEmpty()) {
+                    log(it.toString())
                     val result = recipeRepository.postRecipe(it.toRecipeRequest())
+                    log(result.toString())
                     result?.let { _upload.value = true }
                 }
             }
