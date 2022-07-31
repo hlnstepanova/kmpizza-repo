@@ -24,7 +24,7 @@ struct RecipesView: View {
             
             let _ = print("Recipes View isRecipesFetailsShown: \(isRecipeDetailsShown)" )
             List(state.recipes, id: \.id) { recipe in
-                NavigationLink(destination: RecipeDetailView (id: recipe.id as? KotlinLong, isPresented: self.$isRecipeDetailsShown, uploadSuccess: self.$uploadSuccess), isActive: self.$isRecipeDetailsShown) {
+                NavigationLink(destination: RecipeDetailView (id: recipe.id.toKotlinLong(), isPresented: self.$isRecipeDetailsShown, uploadSuccess: self.$uploadSuccess)) {
                     RecipeView(item: recipe)
                 }
             }
@@ -45,7 +45,7 @@ struct FloatingActionButton: View {
     @Binding var uploadSuccess: Bool
     
     var body: some View {
-        NavigationLink(destination: RecipeDetailView (id: nil, isPresented: $isPresented, uploadSuccess: self.$uploadSuccess), isActive: $isPresented) {
+        NavigationLink(destination: RecipeDetailView (id: nil, isPresented: $isPresented, uploadSuccess: self.$uploadSuccess)) {
             Image(systemName: "plus.circle.fill")
                 .resizable()
                 .frame(width: 56, height: 56)
