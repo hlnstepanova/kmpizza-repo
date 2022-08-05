@@ -1,6 +1,8 @@
 package dev.tutorial.kmpizza.viewmodel
 
-import dev.tutorial.kmpizza.model.*
+import dev.tutorial.kmpizza.model.Ingredient
+import dev.tutorial.kmpizza.model.Instruction
+import dev.tutorial.kmpizza.model.RecipeUiModel
 import dev.tutorial.kmpizza.repository.RecipeRepository
 import dev.tutorial.kmpizza.util.CoroutineViewModel
 import dev.tutorial.kmpizza.util.log
@@ -20,7 +22,8 @@ class RecipeDetailsViewModel(private val id: Long?) : CoroutineViewModel(), Koin
         RecipeUiModel(
             title = "",
             ingredients = listOf(),
-            instructions = listOf()
+            instructions = listOf(),
+            images = listOf()
         )
     )
     val recipe: StateFlow<RecipeUiModel?> = _recipe
@@ -34,7 +37,7 @@ class RecipeDetailsViewModel(private val id: Long?) : CoroutineViewModel(), Koin
 
     fun getRecipe(id: Long) {
         coroutineScope.launch {
-            _recipe.value = recipeRepository.getRecipe(id).toRecipeUiModel()
+            _recipe.value = recipeRepository.getRecipe(id)
         }
     }
 
@@ -43,7 +46,7 @@ class RecipeDetailsViewModel(private val id: Long?) : CoroutineViewModel(), Koin
             recipe.value?.let {
                 if (it.title.isNotEmpty() && it.ingredients.isNotEmpty() && it.instructions.isNotEmpty()) {
                     log(it.toString())
-                    val result = recipeRepository.postRecipe(it.toRecipeRequest())
+                    val result = recipeRepository.postRecipe(it)
                     log(result.toString())
                     result?.let { _upload.value = true }
                 }

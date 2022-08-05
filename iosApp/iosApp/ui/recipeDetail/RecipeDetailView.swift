@@ -16,15 +16,20 @@ struct RecipeDetailView: View {
     @ObservedObject var state: RecipeDetailState
     
     init(id: KotlinLong?, isPresented: Binding<Bool>, uploadSuccess: Binding<Bool> ) {
+        
         self.recipeId = id
         state = RecipeDetailState(recipeId: id, isPresented: isPresented, uploadSuccess: uploadSuccess)
     }
     
     var body: some View {
         ScrollView {
-            KFImage(URL(string: "https://m.media-amazon.com/images/I/413qxEF0QPL._AC_.jpg"))
-                .resizable()
-                .frame(width: 200, height: 150)
+            if (state.recipe?.images.isEmpty == false){
+                KFImage(URL(string: state.recipe?.images.first!.image ?? ""))
+                    .resizable()
+                    .frame(width: 200, height: 150)
+            } else {
+                RecipePlaceholderView().padding(16)
+            }
             
             if (recipeId != nil) {
                 Text(state.recipe?.title ?? "")
@@ -89,7 +94,6 @@ struct Ingredients: View {
     
     var body: some View {
         LazyVStack {
-                let _ = print("Ingredients: \(ingredients)" )
             ForEach(ingredients ?? [], id: \.self, content: { ingredient in
                 HStack {
                     Text(ingredient.name)
@@ -115,7 +119,6 @@ struct Instructions: View {
     
     var body: some View {
         LazyVStack {
-            let _ = print("Instructions: \(instructions)" )
             ForEach(instructions ?? [], id: \.order, content: { instruction in
                 HStack {
                     Text("\(instruction.order). ")
@@ -166,7 +169,6 @@ struct EditIngredients: View {
         
         
         AddButton(action: {
-            let _ = print("Add Ing: \(name), \(amount),\(metric)" )
             viewModel.onIngredientsChanged(ingredient: Ingredient(id: 0, name: name, amount: amount ?? 0.0, metric: metric))
             name = ""
             amount = nil
@@ -200,7 +202,6 @@ struct EditInstructions: View {
         
         
         AddButton(action: {
-            let _ = print("Add Ing: \(instructions?.count), \(description)")
             viewModel.onInstructionsChanged(instruction: Instruction(id: 0, order: Int32((instructions?.count ?? 0) + 1), description: description))
             description = ""
         })

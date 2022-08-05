@@ -13,7 +13,7 @@ class RecipesState: ObservableObject {
      
     let viewModel: RecipeViewModel
     
-    @Published private(set) var recipes: [RecipeResponse]  = []
+    @Published private(set) var recipes: [RecipeUiModel]  = []
     
     init() {
         viewModel = RecipeViewModel()

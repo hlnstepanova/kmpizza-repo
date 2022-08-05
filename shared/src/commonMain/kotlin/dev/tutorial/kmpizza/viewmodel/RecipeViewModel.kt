@@ -1,6 +1,7 @@
 package dev.tutorial.kmpizza.viewmodel
 
 import dev.tutorial.kmpizza.model.RecipeResponse
+import dev.tutorial.kmpizza.model.RecipeUiModel
 import dev.tutorial.kmpizza.repository.RecipeRepository
 import dev.tutorial.kmpizza.util.CoroutineViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,8 +15,8 @@ import org.koin.core.component.inject
 class RecipeViewModel : CoroutineViewModel(), KoinComponent {
     private val recipeRepository: RecipeRepository by inject()
 
-    private val _recipes = MutableStateFlow<List<RecipeResponse>>(emptyList())
-    val recipes: StateFlow<List<RecipeResponse>> = _recipes
+    private val _recipes = MutableStateFlow<List<RecipeUiModel>>(emptyList())
+    val recipes: StateFlow<List<RecipeUiModel>> = _recipes
 
     init {
         getRecipes()
@@ -27,7 +28,7 @@ class RecipeViewModel : CoroutineViewModel(), KoinComponent {
         }
     }
 
-    fun observeRecipes(onChange: (List<RecipeResponse>) -> Unit) {
+    fun observeRecipes(onChange: (List<RecipeUiModel>) -> Unit) {
         recipes.onEach {
             onChange(it)
         }.launchIn(coroutineScope)

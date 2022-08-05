@@ -1,16 +1,22 @@
 package dev.tutorial.kmpizza.android.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,7 +54,13 @@ public fun RecipeDetailsScreen(recipeId: Long? = null, upPress: () -> Unit) {
             modifier = scrolling.padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            HeaderImage(image = placeholder, padding)
+            recipe?.images?.let {
+                if (it.isNotEmpty()) {
+                    HeaderImage(it[0].image, padding)
+                } else {
+                    PlaceholderImage(padding = padding)
+                }
+            }
             recipeId?.let {
                 recipe?.title?.let { Title(it) }
                 SectionHeader(title = "Ingredients")
@@ -242,6 +254,7 @@ private fun HeaderImage(image: String, padding: PaddingValues) {
     Column(modifier = Modifier.padding(padding)) {
         AsyncImage(
             model = image,
+            modifier = Modifier.size(200.dp),
             contentDescription = null
         )
     }
@@ -315,7 +328,29 @@ private fun SectionHeader(title: String) {
         )
         Text(text = title)
     }
+
 }
+
+@Composable
+private fun PlaceholderImage(padding: PaddingValues) {
+    val placeholder = "https://m.media-amazon.com/images/I/413qxEF0QPL._AC_.jpg"
+    Box(contentAlignment = Alignment.Center) {
+        HeaderImage(image = placeholder, padding = padding)
+        IconButton(
+            onClick = {},
+            modifier = Modifier.clip(CircleShape).background(Color.Cyan)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = "edit image",
+                modifier = Modifier
+                    .size(64.dp),
+                tint = Color.Black
+            )
+        }
+    }
+}
+
 
 @Preview
 @Composable
