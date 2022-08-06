@@ -18,11 +18,31 @@ struct RecipesView: View {
     }
     
     var body: some View {
-        List(state.recipes, id: \.id) { recipe in
-            NavigationLink(destination: RecipeDetailView (id: recipe.id.toKotlinLong())) {
-                RecipeView(item: recipe)
+        ZStack(alignment: .bottomTrailing) {
+            List(state.recipes, id: \.id) { recipe in
+                NavigationLink(destination: RecipeDetailView (id: recipe.id.toKotlinLong())) {
+                    RecipeView(item: recipe)
+                    
+                }
             }
-        }.listStyle(PlainListStyle())
+            .listStyle(PlainListStyle())
+            FloatingActionButton()
+                .padding()
+                .frame(alignment: .bottomTrailing)
+        }
     }
 }
+
+struct FloatingActionButton: View {
+    var body: some View {
+        NavigationLink(destination: RecipeDetailView (id: nil)) {
+            Image(systemName: "plus.circle.fill")
+                .resizable()
+                .frame(width: 56, height: 56)
+                .foregroundColor(Color.accentColor)
+                .shadow(color: .gray, radius: 0.2, x: 1, y: 1)
+        }
+    }
+}
+
 
