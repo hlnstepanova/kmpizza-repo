@@ -21,9 +21,7 @@ struct RecipesView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            
-            let _ = print("Recipes View isRecipesFetailsShown: \(isRecipeDetailsShown)" )
-            List(state.recipes, id: \.id) { recipe in
+           List(state.recipes, id: \.id) { recipe in
                 NavigationLink(destination: RecipeDetailView (id: recipe.id.toKotlinLong(), isPresented: self.$isRecipeDetailsShown, uploadSuccess: self.$uploadSuccess)) {
                     RecipeView(item: recipe)
                 }

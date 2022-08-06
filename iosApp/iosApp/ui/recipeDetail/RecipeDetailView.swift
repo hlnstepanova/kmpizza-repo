@@ -89,7 +89,6 @@ struct Ingredients: View {
     
     var body: some View {
         LazyVStack {
-                let _ = print("Ingredients: \(ingredients)" )
             ForEach(ingredients ?? [], id: \.self, content: { ingredient in
                 HStack {
                     Text(ingredient.name)
@@ -115,7 +114,6 @@ struct Instructions: View {
     
     var body: some View {
         LazyVStack {
-            let _ = print("Instructions: \(instructions)" )
             ForEach(instructions ?? [], id: \.order, content: { instruction in
                 HStack {
                     Text("\(instruction.order). ")
@@ -135,8 +133,18 @@ struct EditIngredients: View {
     var viewModel: RecipeDetailsViewModel
     
     @State private var name: String = ""
-    @State private var amount: Double? = nil
+    @State private var amountString: String = ""
     @State private var metric: String = ""
+    
+    private let formatter = NumberFormatter()
+    
+    private var amount: Double {
+        return formatter.number(from: amountString)?.doubleValue ?? 0
+    }
+    
+    private var isValid: Bool {
+        return name != "" && amount > 0 && metric != ""
+    }
     
     
     var body: some View {
@@ -154,22 +162,21 @@ struct EditIngredients: View {
         
         HStack {
             TextField("Ingredient", text: $name)
-                .font(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
-                TextField("Amount", value: amountBinding, formatter: NumberFormatter())
+                TextField("Amount", text: $amountString)
                 TextField("Metric", text: $metric)
-                    .font(.body)
             }
         }
         
+        .font(.body)
+        
         
         AddButton(action: {
-            let _ = print("Add Ing: \(name), \(amount),\(metric)" )
-            viewModel.onIngredientsChanged(ingredient: Ingredient(id: 0, name: name, amount: amount ?? 0.0, metric: metric))
+            viewModel.onIngredientsChanged(ingredient: Ingredient(id: 0, name: name, amount: amount, metric: metric))
             name = ""
-            amount = nil
+            amountString = ""
             metric = ""
         })
         .padding()
@@ -200,7 +207,6 @@ struct EditInstructions: View {
         
         
         AddButton(action: {
-            let _ = print("Add Ing: \(instructions?.count), \(description)")
             viewModel.onInstructionsChanged(instruction: Instruction(id: 0, order: Int32((instructions?.count ?? 0) + 1), description: description))
             description = ""
         })
