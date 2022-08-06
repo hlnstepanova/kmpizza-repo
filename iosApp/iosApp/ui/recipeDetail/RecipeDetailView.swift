@@ -146,40 +146,40 @@ struct EditIngredients: View {
     var viewModel: RecipeDetailsViewModel
     
     @State private var name: String = ""
-    @State private var amount: Double? = nil
+    @State private var amountString: String = ""
     @State private var metric: String = ""
+    
+    private let formatter = NumberFormatter()
+    
+    private var amount: Double {
+        return formatter.number(from: amountString)?.doubleValue ?? 0
+    }
+    
+    private var isValid: Bool {
+        return name != "" && amount > 0 && metric != ""
+    }
     
     
     var body: some View {
-        let amountBinding = Binding<Double?>(
-            get: {
-                if (amount==0.0 && name=="") {
-                    amount = nil
-                }
-                return amount
-            },
-            set: { newValue in amount = (name=="" && metric=="") ? newValue : newValue ?? 0.0 }
-        )
-        
         Ingredients(ingredients: ingredients)
         
         HStack {
             TextField("Ingredient", text: $name)
-                .font(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
-                TextField("Amount", value: amountBinding, formatter: NumberFormatter())
+                TextField("Amount", text: $amountString)
                 TextField("Metric", text: $metric)
-                    .font(.body)
             }
         }
         
+        .font(.body)
+        
         
         AddButton(action: {
-            viewModel.onIngredientsChanged(ingredient: Ingredient(id: 0, name: name, amount: amount ?? 0.0, metric: metric))
+            viewModel.onIngredientsChanged(ingredient: Ingredient(id: 0, name: name, amount: amount, metric: metric))
             name = ""
-            amount = nil
+            amountString = ""
             metric = ""
         })
         .padding()
