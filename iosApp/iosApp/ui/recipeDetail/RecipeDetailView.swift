@@ -148,16 +148,6 @@ struct EditIngredients: View {
     
     
     var body: some View {
-        let amountBinding = Binding<Double?>(
-            get: {
-                if (amount==0.0 && name=="") {
-                    amount = nil
-                }
-                return amount
-            },
-            set: { newValue in amount = (name=="" && metric=="") ? newValue : newValue ?? 0.0 }
-        )
-        
         Ingredients(ingredients: ingredients)
         
         HStack {
