@@ -8,6 +8,7 @@ import software.amazon.awssdk.core.sync.RequestBody
 import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.GetUrlRequest
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 import java.io.File
 
@@ -33,7 +34,7 @@ class AmazonFileStorage : FileStorage {
     override suspend fun save(file: File): String =
     withContext(Dispatchers.IO) {
         client.putObject(
-            PutObjectRequest.builder().bucket(bucketName).key(file.name).build(),
+            PutObjectRequest.builder().bucket(bucketName).key(file.name).acl(ObjectCannedACL.PUBLIC_READ).build(),
             RequestBody.fromFile(file)
         )
         val request = GetUrlRequest.builder().bucket(bucketName).key(file.name).build()
