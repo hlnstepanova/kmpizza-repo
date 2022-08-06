@@ -4,6 +4,7 @@ import dev.tutorial.kmpizza.model.RecipeUiModel
 import dev.tutorial.kmpizza.model.toRecipeRequest
 import dev.tutorial.kmpizza.model.toRecipeUiModel
 import dev.tutorial.kmpizza.remote.RecipeRemoteSource
+import dev.tutorial.kmpizza.util.ImageFile
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -18,6 +19,9 @@ class RecipeRepository : KoinComponent {
 
     suspend fun getRecipe(id: Long): RecipeUiModel =
         recipeRemoteSource.getRecipe(id).toRecipeUiModel()
+
+    suspend fun postRecipeImage(recipeId: Long, imageFile: ImageFile) =
+        recipeRemoteSource.postImage(recipeId, imageFile)
 
 }
 

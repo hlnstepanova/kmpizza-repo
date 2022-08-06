@@ -24,11 +24,18 @@ struct RecipeDetailView: View {
     var body: some View {
         ScrollView {
             if (state.recipe?.images.isEmpty == false){
-                KFImage(URL(string: state.recipe?.images.first!.image ?? ""))
+                KFImage(URL(string: state.recipe?.images.first?.image ?? ""))
                     .resizable()
                     .frame(width: 200, height: 150)
             } else {
-                RecipePlaceholderView().padding(16)
+                RecipePlaceholderView(image: Binding(
+                    get: { state.recipe?.localImage},
+                    set: {
+                        if let image = $0 {
+                            state.viewModel.onImageChanged(image: image)
+                        }
+                    }
+                )).padding(16)
             }
             
             if (recipeId != nil) {
@@ -63,6 +70,7 @@ struct RecipeDetailView: View {
             
             if (recipeId == nil) {
                 Button("Save recipe") {
+                    let _ = "Saving recipe"
                     state.saveRecipe()
                 }
                 .buttonStyle(FilledButtonStyle())

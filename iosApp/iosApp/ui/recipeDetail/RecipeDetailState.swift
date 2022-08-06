@@ -37,8 +37,10 @@ class RecipeDetailState: ObservableObject{
         viewModel.saveRecipe()
         
         viewModel.observeUpload { upload in
+            let _ =  print("Upload result: \(upload)")
             self.upload = upload
             if ((self.upload?.boolValue ?? false) == true){
+                let _ =  print("Here")
                 self.uploadSuccess = true
                 self.isPresented = false
             }

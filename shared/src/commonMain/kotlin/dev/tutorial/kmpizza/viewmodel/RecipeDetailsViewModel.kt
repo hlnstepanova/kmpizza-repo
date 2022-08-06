@@ -5,7 +5,9 @@ import dev.tutorial.kmpizza.model.Instruction
 import dev.tutorial.kmpizza.model.RecipeUiModel
 import dev.tutorial.kmpizza.repository.RecipeRepository
 import dev.tutorial.kmpizza.util.CoroutineViewModel
+import dev.tutorial.kmpizza.util.ImageFile
 import dev.tutorial.kmpizza.util.log
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -43,16 +45,29 @@ class RecipeDetailsViewModel(private val id: Long?) : CoroutineViewModel(), Koin
 
     fun saveRecipe() {
         coroutineScope.launch {
-            recipe.value?.let {
-                if (it.title.isNotEmpty() && it.ingredients.isNotEmpty() && it.instructions.isNotEmpty()) {
-                    log(it.toString())
-                    val result = recipeRepository.postRecipe(it)
-                    log(result.toString())
-                    result?.let { _upload.value = true }
+            recipe.value?.let { recipe ->
+                if (recipe.title.isNotEmpty() && recipe.ingredients.isNotEmpty() && recipe.instructions.isNotEmpty()){
+                    val result = recipeRepository.postRecipe(recipe)
+                    val imageUploadRequest = recipe.localImage.let { image ->
+                        async {
+                            result?.let { it ->
+                                if (image != null) {
+                                    recipeRepository.postRecipeImage(it, image)
+                                }
+                            }
+                        }
+                    }
+                    log("Shared result: $result")
+                    imageUploadRequest.await()
+                    result?.let {
+                        _upload.value = true
+                        log("Shared upload value: ${_upload.value}")
+                    }
                 }
             }
         }
     }
+
 
 
     @Suppress("unused")
@@ -89,6 +104,11 @@ class RecipeDetailsViewModel(private val id: Long?) : CoroutineViewModel(), Koin
 
     }
 
+    override fun onImageChanged(image: ImageFile) {
+        log("Local image: $image")
+        _recipe.value = _recipe.value?.copy(localImage = image)
+    }
+
     fun resetUpload() {
         _upload.value = false
     }
@@ -99,4 +119,5 @@ interface EditRecipeChangeListener {
     fun onTitleChanged(title: String)
     fun onIngredientsChanged(ingredient: Ingredient)
     fun onInstructionsChanged(instruction: Instruction)
+    fun onImageChanged(image: ImageFile)
 }

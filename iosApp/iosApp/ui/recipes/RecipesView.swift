@@ -43,7 +43,7 @@ struct FloatingActionButton: View {
     @Binding var uploadSuccess: Bool
     
     var body: some View {
-        NavigationLink(destination: RecipeDetailView (id: nil, isPresented: $isPresented, uploadSuccess: self.$uploadSuccess)) {
+        NavigationLink(destination: RecipeDetailView (id: nil, isPresented: $isPresented, uploadSuccess: self.$uploadSuccess), isActive: $isPresented) {
             Image(systemName: "plus.circle.fill")
                 .resizable()
                 .frame(width: 56, height: 56)

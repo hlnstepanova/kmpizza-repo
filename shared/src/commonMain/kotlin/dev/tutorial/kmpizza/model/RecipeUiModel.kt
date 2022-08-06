@@ -1,11 +1,14 @@
 package dev.tutorial.kmpizza.model
 
+import dev.tutorial.kmpizza.util.ImageFile
+
 data class RecipeUiModel(
     val id: Long = 0,
     val title: String,
     val ingredients: List<Ingredient> = listOf(),
     val instructions: List<Instruction> = listOf(),
-    val images: List<RecipeImage> = listOf()
+    val images: List<RecipeImage> = listOf(),
+    val localImage: ImageFile? = null
 )
 
 fun RecipeResponse.toRecipeUiModel() = RecipeUiModel(
@@ -13,7 +16,8 @@ fun RecipeResponse.toRecipeUiModel() = RecipeUiModel(
     title = title,
     ingredients = ingredients,
     instructions = instructions,
-    images = images
+    images = images,
+
 )
 
 fun RecipeUiModel.toRecipeRequest() = RecipeRequest(
