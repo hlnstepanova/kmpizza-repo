@@ -70,7 +70,6 @@ struct RecipeDetailView: View {
             
             if (recipeId == nil) {
                 Button("Save recipe") {
-                    let _ = "Saving recipe"
                     state.saveRecipe()
                 }
                 .buttonStyle(FilledButtonStyle())
@@ -78,7 +77,6 @@ struct RecipeDetailView: View {
             }
             
         }.padding()
-        
     }
 }
 
@@ -172,9 +170,7 @@ struct EditIngredients: View {
                 TextField("Metric", text: $metric)
             }
         }
-        
         .font(.body)
-        
         
         AddButton(action: {
             viewModel.onIngredientsChanged(ingredient: Ingredient(id: 0, name: name, amount: amount, metric: metric))
@@ -183,7 +179,6 @@ struct EditIngredients: View {
             metric = ""
         })
         .padding()
-        
     }
 }
 
@@ -201,13 +196,10 @@ struct EditInstructions: View {
         
         HStack {
             Text ("\((instructions?.count ?? 0) + 1). ")
-                .font(.body)
             TextField("Description", text: $description)
-                .font(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
         }
-        
+        .font(.body)
         
         AddButton(action: {
             viewModel.onInstructionsChanged(instruction: Instruction(id: 0, order: Int32((instructions?.count ?? 0) + 1), description: description))
