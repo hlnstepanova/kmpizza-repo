@@ -3,6 +3,12 @@ package dev.tutorial.kmpizza.di
 import dev.tutorial.kmpizza.api.KtorApi
 import dev.tutorial.kmpizza.api.KtorApiImpl
 import dev.tutorial.kmpizza.api.RecipesApi
+import dev.tutorial.kmpizza.db.KmpizzaDatabase
+import dev.tutorial.kmpizza.db.Recipe
+import dev.tutorial.kmpizza.local.RecipeLocalSource
+import dev.tutorial.kmpizza.local.listOfIngredientsAdapter
+import dev.tutorial.kmpizza.local.listOfInstructionsAdapter
+import dev.tutorial.kmpizza.local.listOfRecipeImagesAdapter
 import dev.tutorial.kmpizza.remote.RecipeRemoteSource
 import dev.tutorial.kmpizza.repository.RecipeRepository
 import dev.tutorial.kmpizza.viewmodel.RecipeViewModel
@@ -15,8 +21,23 @@ fun initKoin(appDeclaration: KoinAppDeclaration) = startKoin {
     modules(
         apiModule,
         repositoryModule,
-        viewModelModule
+        viewModelModule,
+        platformModule,
+        coreModule
     )
+}
+
+private val coreModule = module {
+    single {
+        KmpizzaDatabase(
+            get(),
+            Recipe.Adapter(
+                instructionsAdapter = listOfInstructionsAdapter,
+                ingredientsAdapter = listOfIngredientsAdapter,
+                imagesAdapter = listOfRecipeImagesAdapter
+            )
+        )
+    }
 }
 
 private val apiModule = module {
@@ -29,6 +50,7 @@ private val viewModelModule = module {
 }
 
 private val repositoryModule = module {
+    factory { RecipeLocalSource(get()) }
     factory { RecipeRemoteSource(get()) }
     single { RecipeRepository() }
 }

@@ -5,6 +5,7 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
+    id("com.squareup.sqldelight")
 }
 
 version = "1.0"
@@ -49,6 +50,9 @@ kotlin {
                         strictly(Versions.COROUTINES_MT)
                     }
                 }
+
+                // SQLDelight
+                implementation(Versions.Common.SQLDELIGHT_DRIVER)
             }
         }
 
@@ -64,6 +68,8 @@ kotlin {
                 implementation(Versions.Android.KTOR_CLIENT)
                 implementation(Versions.Android.KTOR_OKHTTP)
                 implementation(Versions.Android.VIEW_MODEL)
+
+                implementation(Versions.Android.SQLDELIGHT_DRIVER)
             }
         }
 
@@ -77,6 +83,8 @@ kotlin {
         val iosMain by getting {
             dependencies {
                 implementation(Versions.iOS.KTOR_CLIENT)
+
+                implementation(Versions.iOS.SQLDELIGHT_DRIVER)
             }
         }
 
@@ -90,5 +98,12 @@ android {
     defaultConfig {
         minSdk = 21
         targetSdk = 31
+    }
+}
+
+sqldelight {
+    database("KmpizzaDatabase") { // This will be the name of the generated database class.
+        packageName = "dev.tutorial.kmpizza.db"
+        sourceFolders = listOf("sqldelight")
     }
 }
