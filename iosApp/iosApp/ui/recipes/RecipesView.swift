@@ -22,9 +22,10 @@ struct RecipesView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             List(state.recipes, id: \.id) { recipe in
-                NavigationLink(destination: RecipeDetailView (id: recipe.id.toKotlinLong(), isPresented: self.$isRecipeDetailsShown, uploadSuccess: self.$uploadSuccess)) {
+                NavigationLink(destination: RecipeDetailView (id: recipe.id, isPresented: self.$isRecipeDetailsShown, uploadSuccess: self.$uploadSuccess)) {
                     RecipeView(item: recipe)
                 }
+                
             }
             .listStyle(PlainListStyle())
             FloatingActionButton(isPresented: self.$isRecipeDetailsShown, uploadSuccess: self.$uploadSuccess)
@@ -32,7 +33,7 @@ struct RecipesView: View {
                 .frame(alignment: .bottomTrailing)
         }.onAppear {
             if uploadSuccess {
-                state.viewModel.getRecipes()
+                state.getRecipes()
             }
         }
     }
@@ -50,10 +51,6 @@ struct FloatingActionButton: View {
                 .foregroundColor(Color.accentColor)
                 .shadow(color: .gray, radius: 0.2, x: 1, y: 1)
         }
-        .simultaneousGesture(
-            TapGesture().onEnded {
-                isPresented = true
-            })
     }
 }
 

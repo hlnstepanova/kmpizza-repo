@@ -45,6 +45,7 @@ class RecipeDetailsViewModel(private val id: Long?) : CoroutineViewModel(), Koin
 
     fun saveRecipe() {
         coroutineScope.launch {
+            log("Before post recipe: ${recipe.value}")
             recipe.value?.let { recipe ->
                 if (recipe.title.isNotEmpty() && recipe.ingredients.isNotEmpty() && recipe.instructions.isNotEmpty()){
                     log("Post recipe: $recipe")
