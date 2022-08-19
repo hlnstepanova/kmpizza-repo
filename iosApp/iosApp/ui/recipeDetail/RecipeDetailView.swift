@@ -17,9 +17,9 @@ struct RecipeDetailView: View {
     let recipeId: KotlinLong?
     @ObservedObject var state: RecipeDetailState
     
-    init(id: KotlinLong?) {
+    init(id: KotlinLong?, isPresented: Binding<Bool>, uploadSuccess: Binding<Bool> ) {
         self.recipeId = id
-        state = RecipeDetailState(recipeId: id)
+        state = RecipeDetailState(recipeId: id, isPresented: isPresented, uploadSuccess: uploadSuccess)
     }
     
     var body: some View {
@@ -61,14 +61,12 @@ struct RecipeDetailView: View {
             if (recipeId == nil) {
                 Button("Save recipe") {
                     state.saveRecipe()
-                    presentationMode.wrappedValue.dismiss()
                 }
                 .buttonStyle(FilledButtonStyle())
                 .padding()
             }
             
         }.padding()
-      
     }
 }
 
@@ -165,7 +163,7 @@ struct EditIngredients: View {
         .font(.body)
         
         AddButton(action: {
-            viewModel.onIngredientsChanged(ingredient: Ingredient(id: nil, name: name, amount: amount, metric: metric))
+            viewModel.onIngredientsChanged(ingredient: Ingredient(id: 0, name: name, amount: amount, metric: metric))
             name = ""
             amountString = ""
             metric = ""
@@ -188,19 +186,17 @@ struct EditInstructions: View {
         
         HStack {
             Text ("\((instructions?.count ?? 0) + 1). ")
-                .font(.body)
             TextField("Description", text: $description)
-                .font(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
         }
+        .font(.body)
         
         
         AddButton(action: {
-            viewModel.onInstructionsChanged(instruction: Instruction(id: nil, order: Int32((instructions?.count ?? 0) + 1), description: description))
+            viewModel.onInstructionsChanged(instruction: Instruction(id: 0, order: Int32((instructions?.count ?? 0) + 1), description: description))
+            
             description = ""
         })
-        
         .padding()
     }
 }

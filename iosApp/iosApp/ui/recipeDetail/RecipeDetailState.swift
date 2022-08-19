@@ -15,11 +15,17 @@ class RecipeDetailState: ObservableObject{
     let recipeId: KotlinLong?
     let viewModel: RecipeDetailsViewModel
     
-    @Published private(set) var recipe: RecipeUiModel? = nil
-    @Published private(set) var upload: Bool? = nil
+    @Binding var isPresented: Bool
+    @Binding var uploadSuccess: Bool
     
-    init(recipeId: KotlinLong?) {
+    @Published private(set) var recipe: RecipeUiModel? = nil
+    @Published private(set) var upload: KotlinBoolean? = nil
+    
+    init(recipeId: KotlinLong?, isPresented: Binding<Bool>, uploadSuccess: Binding<Bool>) {
         self.recipeId = recipeId
+        self._isPresented = isPresented
+        self._uploadSuccess = uploadSuccess
+        
         viewModel = RecipeDetailsViewModel(id: recipeId)
         
         viewModel.observeRecipe { recipe in
@@ -29,6 +35,14 @@ class RecipeDetailState: ObservableObject{
     
     func saveRecipe(){
         viewModel.saveRecipe()
+        
+        viewModel.observeUpload { upload in
+            self.upload = upload
+            if ((self.upload?.boolValue ?? false) == true){
+                self.uploadSuccess = true
+                self.isPresented = false
+            }
+        }
     }
     
     deinit {

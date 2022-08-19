@@ -39,17 +39,21 @@ public fun RecipesScreen(onRecipeClicked: (RecipeResponse) -> Unit, onAddRecipe:
             )
         }
     }) {
-        Recipes(items = recipes, onRecipeClicked = onRecipeClicked)
+        Recipes(
+            items = recipes,
+            onRecipeClicked = onRecipeClicked,
+            modifier = Modifier.padding(it)
+        )
     }
 }
 
 @Composable
 fun Recipes(
     items: List<RecipeResponse>,
-    onRecipeClicked: (RecipeResponse) -> Unit
-
+    onRecipeClicked: (RecipeResponse) -> Unit,
+    modifier: Modifier
 ) {
-    LazyColumn {
+    LazyColumn (modifier = modifier) {
         itemsIndexed(
             items = items,
             itemContent = { _, item ->
