@@ -44,6 +44,7 @@ struct FloatingActionButton: View {
     
     var body: some View {
         NavigationLink(destination: RecipeDetailView (id: nil, isPresented: $isPresented, uploadSuccess: self.$uploadSuccess), isActive: $isPresented) {
+
             Image(systemName: "plus.circle.fill")
                 .resizable()
                 .frame(width: 56, height: 56)
@@ -54,6 +55,7 @@ struct FloatingActionButton: View {
             TapGesture().onEnded {
                 isPresented = true
             })
+
     }
 }
 

@@ -12,6 +12,8 @@ import Kingfisher
 
 struct RecipeDetailView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     let recipeId: KotlinLong?
     @ObservedObject var state: RecipeDetailState
     
