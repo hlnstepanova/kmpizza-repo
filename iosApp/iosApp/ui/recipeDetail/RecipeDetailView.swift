@@ -191,7 +191,6 @@ struct EditInstructions: View {
             Text ("\((instructions?.count ?? 0) + 1). ")
             TextField("Description", text: $description)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
         }
         .font(.body)
        
@@ -199,7 +198,6 @@ struct EditInstructions: View {
             viewModel.onInstructionsChanged(instruction: Instruction(id: 0, order: Int32((instructions?.count ?? 0) + 1), description: description))
             description = ""
         })
-        
         .padding()
     }
 }
