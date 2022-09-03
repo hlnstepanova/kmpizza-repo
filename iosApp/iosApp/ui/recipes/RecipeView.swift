@@ -12,7 +12,7 @@ import struct Kingfisher.KFImage
  
 struct RecipeView: View {
     
-    var item: RecipeResponse
+    var item: RecipeUiModel
     
     var body: some View {
         HStack(alignment: .center) {
@@ -28,4 +28,5 @@ struct RecipeView: View {
         }
     }
 }
+
 

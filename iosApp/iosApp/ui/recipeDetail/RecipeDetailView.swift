@@ -12,21 +12,24 @@ import Kingfisher
 
 struct RecipeDetailView: View {
     
-    @Environment(\.presentationMode) var presentationMode
-    
     let recipeId: KotlinLong?
     @ObservedObject var state: RecipeDetailState
     
     init(id: KotlinLong?, isPresented: Binding<Bool>, uploadSuccess: Binding<Bool> ) {
+        
         self.recipeId = id
         state = RecipeDetailState(recipeId: id, isPresented: isPresented, uploadSuccess: uploadSuccess)
     }
     
     var body: some View {
         ScrollView {
-            KFImage(URL(string: "https://m.media-amazon.com/images/I/413qxEF0QPL._AC_.jpg"))
-                .resizable()
-                .frame(width: 200, height: 150)
+            if (state.recipe?.images.isEmpty == false){
+                KFImage(URL(string: state.recipe?.images.first!.image ?? ""))
+                    .resizable()
+                    .frame(width: 200, height: 150)
+            } else {
+                RecipePlaceholderView().padding(16)
+            }
             
             if (recipeId != nil) {
                 Text(state.recipe?.title ?? "")
@@ -190,11 +193,9 @@ struct EditInstructions: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .font(.body)
-        
-        
+       
         AddButton(action: {
             viewModel.onInstructionsChanged(instruction: Instruction(id: 0, order: Int32((instructions?.count ?? 0) + 1), description: description))
-            
             description = ""
         })
         .padding()
