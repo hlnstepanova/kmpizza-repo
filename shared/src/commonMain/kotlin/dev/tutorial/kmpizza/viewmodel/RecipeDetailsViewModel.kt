@@ -102,7 +102,6 @@ class RecipeDetailsViewModel(private val id: Long?) : CoroutineViewModel(), Koin
         _recipe.value = _recipe.value?.copy(
             instructions = instructions?.plus(instruction) ?: listOf(instruction)
         )
-
     }
 
     override fun onImageChanged(image: ImageFile) {

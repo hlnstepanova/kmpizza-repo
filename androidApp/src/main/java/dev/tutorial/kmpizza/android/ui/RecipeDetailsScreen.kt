@@ -335,7 +335,6 @@ private fun SectionHeader(title: String) {
         )
         Text(text = title)
     }
-
 }
 
 @Composable
