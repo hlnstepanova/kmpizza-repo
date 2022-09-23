@@ -1,5 +1,10 @@
 package dev.tutorial.kmpizza.android.ui
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,23 +15,23 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
 import dev.tutorial.kmpizza.android.R
 import dev.tutorial.kmpizza.android.ui.utils.TopBar
 import dev.tutorial.kmpizza.model.Ingredient
 import dev.tutorial.kmpizza.model.Instruction
+import dev.tutorial.kmpizza.util.ImageFile
+import dev.tutorial.kmpizza.util.toImageFile
 import dev.tutorial.kmpizza.viewmodel.EditRecipeChangeListener
 import dev.tutorial.kmpizza.viewmodel.RecipeDetailsViewModel
 
@@ -46,6 +51,8 @@ public fun RecipeDetailsScreen(recipeId: Long? = null, upPress: () -> Unit) {
         viewModel.resetUpload()
     }
 
+    val getImage = registerForGalleryResult(viewModel::onImageChanged)
+
     Scaffold(
         topBar = { TopBar(upPress = upPress) }
     )
@@ -58,7 +65,7 @@ public fun RecipeDetailsScreen(recipeId: Long? = null, upPress: () -> Unit) {
                 if (it.isNotEmpty()) {
                     HeaderImage(it[0].image, padding)
                 } else {
-                    PlaceholderImage(padding = padding)
+                    PlaceholderImage(padding, getImage, recipe?.localImage, recipeId == null)
                 }
             }
             recipeId?.let {
@@ -241,7 +248,7 @@ private fun NewIngredient(
 private fun AddItemButton(onAddInstruction: () -> Unit = {}) {
     IconButton(onClick = onAddInstruction) {
         Icon(
-            painter = rememberImagePainter(R.drawable.ic_add),
+            painter = rememberAsyncImagePainter(R.drawable.ic_add),
             contentDescription = null,
             modifier = Modifier.clip(CircleShape)
         )
@@ -250,7 +257,7 @@ private fun AddItemButton(onAddInstruction: () -> Unit = {}) {
 
 
 @Composable
-private fun HeaderImage(image: String, padding: PaddingValues) {
+private fun HeaderImage(image: Any, padding: PaddingValues) {
     Column(modifier = Modifier.padding(padding)) {
         AsyncImage(
             model = image,
@@ -328,28 +335,46 @@ private fun SectionHeader(title: String) {
         )
         Text(text = title)
     }
-
 }
 
 @Composable
-private fun PlaceholderImage(padding: PaddingValues) {
+private fun PlaceholderImage(
+    padding: PaddingValues,
+    getImage: ActivityResultLauncher<String>,
+    localImage: ImageFile?,
+    isEditable: Boolean
+) {
     val placeholder = "https://m.media-amazon.com/images/I/413qxEF0QPL._AC_.jpg"
     Box(contentAlignment = Alignment.Center) {
-        HeaderImage(image = placeholder, padding = padding)
-        IconButton(
-            onClick = {},
-            modifier = Modifier.clip(CircleShape).background(Color.Cyan)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "edit image",
+        HeaderImage(image = localImage?.uri ?: placeholder, padding = padding)
+        if (isEditable) {
+            IconButton(
                 modifier = Modifier
-                    .size(64.dp),
-                tint = Color.Black
-            )
+                    .clip(CircleShape)
+                    .background(Color.Cyan),
+                onClick = { getImage.launchAsImageResult() }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "edit image",
+                    modifier = Modifier
+                        .size(64.dp),
+                    tint = Color.Black
+                )
+            }
         }
     }
 }
+
+private fun ActivityResultLauncher<String>.launchAsImageResult() = launch("image/*")
+
+@Composable
+fun registerForGalleryResult(callback: (ImageFile) -> Unit) =
+    (LocalContext.current as AppCompatActivity).contentResolver.let { contentResolver ->
+        rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.toImageFile(contentResolver)?.let(callback)
+        }
+    }
 
 
 @Preview
