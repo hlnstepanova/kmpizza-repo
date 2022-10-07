@@ -16,8 +16,7 @@ fun RecipeResponse.toRecipeUiModel() = RecipeUiModel(
     title = title,
     ingredients = ingredients,
     instructions = instructions,
-    images = images,
-
+    images = images
 )
 
 fun RecipeUiModel.toRecipeRequest() = RecipeRequest(
