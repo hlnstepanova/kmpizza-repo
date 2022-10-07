@@ -46,7 +46,7 @@ class RecipeDetailsViewModel(private val id: Long?) : CoroutineViewModel(), Koin
     fun saveRecipe() {
         coroutineScope.launch {
             recipe.value?.let { recipe ->
-                if (recipe.title.isNotEmpty() && recipe.ingredients.isNotEmpty() && recipe.instructions.isNotEmpty()){
+                if (recipe.title.isNotEmpty() && recipe.ingredients.isNotEmpty() && recipe.instructions.isNotEmpty()) {
                     log("Post recipe: $recipe")
                     val result = recipeRepository.postRecipe(recipe)
                     val imageUploadRequest = recipe.localImage.let { image ->
@@ -68,7 +68,6 @@ class RecipeDetailsViewModel(private val id: Long?) : CoroutineViewModel(), Koin
             }
         }
     }
-
 
 
     @Suppress("unused")

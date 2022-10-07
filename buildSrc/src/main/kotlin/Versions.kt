@@ -15,6 +15,7 @@ object Versions {
     const val COIL = "2.0.0-rc03"
     const val SLF4J_VERSION = "2.17.2"
     const val COROUTINES_MT = "1.6.3-native-mt"
+    const val SQL_DELIGHT = "1.5.3"
 
     object Jvm {
         const val KTOR_AUTH = "io.ktor:ktor-server-auth:$KTOR_VERSION"
@@ -47,6 +48,10 @@ object Versions {
         const val KOIN_CORE = "io.insert-koin:koin-core:$KOIN_VERSION"
 
         const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINES_MT"
+
+        const val SQLDELIGHT_PLUGIN = "com.squareup.sqldelight:gradle-plugin:$SQL_DELIGHT"
+        const val SQLDELIGHT_DRIVER = "com.squareup.sqldelight:runtime:$SQL_DELIGHT"
+
     }
 
     object Android {
@@ -67,9 +72,13 @@ object Versions {
         const val MATERIAL_COMPONENTS = "com.google.android.material:material:$MATERIAL"
 
         const val KOIN_ANDROID_MAIN = "io.insert-koin:koin-android:$KOIN_VERSION"
+
+        const val SQLDELIGHT_DRIVER = "com.squareup.sqldelight:android-driver:$SQL_DELIGHT"
     }
 
     object iOS {
         const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
+
+        const val SQLDELIGHT_DRIVER = "com.squareup.sqldelight:native-driver:$SQL_DELIGHT"
     }
 }
