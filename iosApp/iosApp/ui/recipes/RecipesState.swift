@@ -27,5 +27,9 @@ class RecipesState: ObservableObject {
     deinit {
         viewModel.dispose()
     }
+    
+    func getRecipes() {
+        viewModel.getRecipes()
+    }
 }
 

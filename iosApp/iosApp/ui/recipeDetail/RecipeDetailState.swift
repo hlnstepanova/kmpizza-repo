@@ -19,7 +19,34 @@ class RecipeDetailState: ObservableObject{
     @Binding var uploadSuccess: Bool
     
     @Published private(set) var recipe: RecipeUiModel? = nil
-    @Published private(set) var upload: KotlinBoolean? = nil
+
+    @Published var title: String = "" {
+        didSet {
+            viewModel.onTitleChanged(title: title)
+        }
+    }
+    
+    @Published var ingredients: [Ingredient] = [] {
+        didSet {
+            if let ingredient = ingredients.last {
+            viewModel.onIngredientsChanged(ingredient: ingredient)
+            }
+        }
+    }
+    
+    @Published var instructions: [Instruction] = [] {
+        didSet {
+            if let instruction = instructions.last {
+            viewModel.onInstructionsChanged(instruction: instruction)
+            }
+        }
+    }
+    
+    @Published var image: UIImage? = nil {
+        didSet {
+            viewModel.onImageChanged(image: image ?? UIImage())
+        }
+    }
     
     init(recipeId: KotlinLong?, isPresented: Binding<Bool>, uploadSuccess: Binding<Bool>) {
         self.recipeId = recipeId
@@ -37,8 +64,7 @@ class RecipeDetailState: ObservableObject{
         viewModel.saveRecipe()
         
         viewModel.observeUpload { upload in
-            self.upload = upload
-            if ((self.upload?.boolValue ?? false) == true){
+            if ((upload?.boolValue ?? false) == true){
                 self.uploadSuccess = true
                 self.isPresented = false
             }
