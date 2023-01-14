@@ -25,7 +25,8 @@ struct RecipeDetailView: View {
             if (state.recipe?.images.isEmpty == false){
                 KFImage(URL(string: state.recipe?.images.first?.image ?? ""))
                     .resizable()
-                    .frame(width: 200, height: 150)
+                    .placeholder { Image("no_pizza").resizable() }
+                    .frame(width: 180, height: 180)
             } else {
                 RecipePlaceholderView(image: $state.image).padding(16)
             }

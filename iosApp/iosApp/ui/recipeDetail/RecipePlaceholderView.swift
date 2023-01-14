@@ -21,7 +21,8 @@ struct RecipePlaceholderView: View {
                     .resizable()
                     .frame(width: 200, height: 150)
             } else {
-                KFImage(URL(string: "https://m.media-amazon.com/images/I/413qxEF0QPL._AC_.jpg"))
+                KFImage
+                    .url((URL(string: "https://m.media-amazon.com/images/I/413qxEF0QPL._AC_.jpg")))
                     .resizable()
                     .frame(width: 200, height: 150)
             }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">KMPizza</string>
     <string name="name">Name</string>
     <string name="amount">Amount</string>
     <string name="metric">Metric</string>

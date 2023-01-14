@@ -20,6 +20,7 @@ class RecipeDetailState: ObservableObject{
     
     @Published private(set) var recipe: RecipeUiModel? = nil
 
+
     @Published var title: String = "" {
         didSet {
             viewModel.onTitleChanged(title: title)

@@ -1,0 +1,6 @@
+framework module Pods_KMPizza {
+  umbrella header "Pods-KMPizza-umbrella.h"
+
+  export *
+  module * { export * }
+}
