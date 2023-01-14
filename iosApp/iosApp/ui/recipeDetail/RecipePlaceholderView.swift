@@ -33,7 +33,6 @@ struct RecipePlaceholderView: View {
                 .frame(width: 50, height: 50)
                 .background(Color.accentColor)
                 .clipShape(Circle())
-            
         }
         .sheet(isPresented: $showingImagePicker){
             ImagePickerIOS(onImageSelected: {

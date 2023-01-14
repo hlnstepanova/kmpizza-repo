@@ -19,7 +19,7 @@ class RecipeDetailState: ObservableObject{
     @Binding var uploadSuccess: Bool
     
     @Published private(set) var recipe: RecipeUiModel? = nil
-    
+
 
     @Published var title: String = "" {
         didSet {
@@ -48,6 +48,7 @@ class RecipeDetailState: ObservableObject{
             viewModel.onImageChanged(image: image ?? UIImage())
         }
     }
+    
     init(recipeId: KotlinLong?, isPresented: Binding<Bool>, uploadSuccess: Binding<Bool>) {
         self.recipeId = recipeId
         self._isPresented = isPresented
