@@ -8,7 +8,7 @@ import io.ktor.serialization.kotlinx.json.*
 
 class KtorApiImpl() : KtorApi {
 
-    val prodUrl = "https://enigmatic-sands-01782.herokuapp.com/"
+    val prodUrl = "https://kmpizza.fly.dev/"
 
     override val client = HttpClient {
         install(ContentNegotiation) {
