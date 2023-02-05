@@ -35,7 +35,10 @@ internal class LocalSourceImpl(
 
     init {
         val config = application.environment.config.config("database")
-        val url = System.getenv("JDBC_DATABASE_URL")
+        val dbUser = config.property("user").getString()
+        val dbPassword = config.property("password").getString()
+        val dbName = config.property("db_name").getString()
+        val url = "jdbc:postgresql://snuffleupagus.db.elephantsql.com/$dbName"
         val driver = config.property("driver").getString()
         val poolSize = config.property("poolSize").getString().toInt()
         application.log.info("Connecting to db at $url")
@@ -45,6 +48,8 @@ internal class LocalSourceImpl(
             jdbcUrl = url
             maximumPoolSize = poolSize
             driverClassName = driver
+            username = dbUser
+            password = dbPassword
             validate()
         }
 
