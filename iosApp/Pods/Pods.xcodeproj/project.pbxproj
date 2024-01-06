@@ -21,8 +21,8 @@
 
 /* Begin PBXBuildFile section */
 		39191EE0C6ECF69A8473CBB9189BBB8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		B3FFB43D3BD7B422F9583DBFAF212C3A /* Pods-KMPizza-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 41792FC7993422D8E5EBA6EE322B4248 /* Pods-KMPizza-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CBB62C95DA089B18708331D522AF050A /* Pods-KMPizza-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 588D86559FE05300A94FCDE70BDA2D9D /* Pods-KMPizza-dummy.m */; };
+		B3FFB43D3BD7B422F9583DBFAF212C3A /* Pods-KMPizza-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F0246F6C1636BB088418CBE1358B9BC9 /* Pods-KMPizza-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CBB62C95DA089B18708331D522AF050A /* Pods-KMPizza-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 66034BFB3FE11FA10A986D4304204142 /* Pods-KMPizza-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,20 +36,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2D6D4DCDA28A41F4051074E17698C794 /* Pods-KMPizza-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KMPizza-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0C23596244892EC2A7E085A01B4C20E5 /* Pods-KMPizza-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KMPizza-acknowledgements.plist"; sourceTree = "<group>"; };
+		167B9A63EDAE9A768498E89F684EDEBA /* Pods-KMPizza-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KMPizza-frameworks.sh"; sourceTree = "<group>"; };
+		3207FFCAD580C428031D60028A998A8F /* Pods-KMPizza.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KMPizza.debug.xcconfig"; sourceTree = "<group>"; };
 		35548E3BD8DA30925E8FE97E67B84868 /* shared.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = shared.release.xcconfig; sourceTree = "<group>"; };
-		41792FC7993422D8E5EBA6EE322B4248 /* Pods-KMPizza-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KMPizza-umbrella.h"; sourceTree = "<group>"; };
-		418D1F183E22AA5DA1195274DE7004EA /* Pods-KMPizza-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KMPizza-Info.plist"; sourceTree = "<group>"; };
-		588D86559FE05300A94FCDE70BDA2D9D /* Pods-KMPizza-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KMPizza-dummy.m"; sourceTree = "<group>"; };
-		6733FC78F85718FB815EBE046CF43B02 /* Pods-KMPizza.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KMPizza.debug.xcconfig"; sourceTree = "<group>"; };
+		3618924AF5B09332C60ED9AF3CFC0B88 /* Pods-KMPizza.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KMPizza.modulemap"; sourceTree = "<group>"; };
+		66034BFB3FE11FA10A986D4304204142 /* Pods-KMPizza-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KMPizza-dummy.m"; sourceTree = "<group>"; };
+		66370D9FAF45E4E82833ED7C168D8B99 /* Pods-KMPizza-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KMPizza-acknowledgements.markdown"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		73D4D08B8C9FAD17B10E8E5C0EB49A76 /* shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = shared.framework; path = build/cocoapods/framework/shared.framework; sourceTree = "<group>"; };
 		80CE8610F046178B7D5460E60B4782E1 /* Pods-KMPizza */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-KMPizza"; path = Pods_KMPizza.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95B09EA82E7AF9ACCCCAF3E55C859116 /* shared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = shared.debug.xcconfig; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B00B3289EB777AE7A1DB995B17A1E5A0 /* Pods-KMPizza.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KMPizza.modulemap"; sourceTree = "<group>"; };
-		CC611762AF0070789ADCFA254825DECE /* Pods-KMPizza-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KMPizza-acknowledgements.plist"; sourceTree = "<group>"; };
-		F2526E02820DF15E886F6C6354557BD8 /* Pods-KMPizza.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KMPizza.release.xcconfig"; sourceTree = "<group>"; };
+		DBE903B91F261E2C4FAF541651EDF4C0 /* Pods-KMPizza.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KMPizza.release.xcconfig"; sourceTree = "<group>"; };
+		DEBA01BE7437AE388C4EFECBC61B1CEC /* Pods-KMPizza-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KMPizza-Info.plist"; sourceTree = "<group>"; };
+		F0246F6C1636BB088418CBE1358B9BC9 /* Pods-KMPizza-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KMPizza-umbrella.h"; sourceTree = "<group>"; };
 		FB1BF8BE937671FB0F330C2D28634477 /* shared.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = shared.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
@@ -65,14 +66,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		11BA16C78F88E900E068A4EC0565D8F1 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				60381D3C741B5FA238F1D0C0D138C36D /* Pods-KMPizza */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
 		313FE5FE915A4A924C55AAC02A910D61 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,22 +100,6 @@
 			path = "../iosApp/Pods/Target Support Files/shared";
 			sourceTree = "<group>";
 		};
-		60381D3C741B5FA238F1D0C0D138C36D /* Pods-KMPizza */ = {
-			isa = PBXGroup;
-			children = (
-				B00B3289EB777AE7A1DB995B17A1E5A0 /* Pods-KMPizza.modulemap */,
-				2D6D4DCDA28A41F4051074E17698C794 /* Pods-KMPizza-acknowledgements.markdown */,
-				CC611762AF0070789ADCFA254825DECE /* Pods-KMPizza-acknowledgements.plist */,
-				588D86559FE05300A94FCDE70BDA2D9D /* Pods-KMPizza-dummy.m */,
-				418D1F183E22AA5DA1195274DE7004EA /* Pods-KMPizza-Info.plist */,
-				41792FC7993422D8E5EBA6EE322B4248 /* Pods-KMPizza-umbrella.h */,
-				6733FC78F85718FB815EBE046CF43B02 /* Pods-KMPizza.debug.xcconfig */,
-				F2526E02820DF15E886F6C6354557BD8 /* Pods-KMPizza.release.xcconfig */,
-			);
-			name = "Pods-KMPizza";
-			path = "Target Support Files/Pods-KMPizza";
-			sourceTree = "<group>";
-		};
 		7DBF81461E18ACE1B4BD971BAC841CF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +116,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		9C8E3C3847FC3A66BEB603999CAB0382 /* Pods-KMPizza */ = {
+			isa = PBXGroup;
+			children = (
+				3618924AF5B09332C60ED9AF3CFC0B88 /* Pods-KMPizza.modulemap */,
+				66370D9FAF45E4E82833ED7C168D8B99 /* Pods-KMPizza-acknowledgements.markdown */,
+				0C23596244892EC2A7E085A01B4C20E5 /* Pods-KMPizza-acknowledgements.plist */,
+				66034BFB3FE11FA10A986D4304204142 /* Pods-KMPizza-dummy.m */,
+				167B9A63EDAE9A768498E89F684EDEBA /* Pods-KMPizza-frameworks.sh */,
+				DEBA01BE7437AE388C4EFECBC61B1CEC /* Pods-KMPizza-Info.plist */,
+				F0246F6C1636BB088418CBE1358B9BC9 /* Pods-KMPizza-umbrella.h */,
+				3207FFCAD580C428031D60028A998A8F /* Pods-KMPizza.debug.xcconfig */,
+				DBE903B91F261E2C4FAF541651EDF4C0 /* Pods-KMPizza.release.xcconfig */,
+			);
+			name = "Pods-KMPizza";
+			path = "Target Support Files/Pods-KMPizza";
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
@@ -146,7 +140,7 @@
 				313FE5FE915A4A924C55AAC02A910D61 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				8E0170651A760927850CE63FF7D1AFC6 /* Products */,
-				11BA16C78F88E900E068A4EC0565D8F1 /* Targets Support Files */,
+				EB904CEAFC44ACAF5367614369DE4E0D /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,6 +150,14 @@
 				578452D2E740E91742655AC8F1636D1F /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB904CEAFC44ACAF5367614369DE4E0D /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9C8E3C3847FC3A66BEB603999CAB0382 /* Pods-KMPizza */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		EEF3277DCE2E4B31CF76A57AB68C2BA1 /* shared */ = {
@@ -404,7 +406,7 @@
 		};
 		A57C669B6E23B9D16247026C1A70D043 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2526E02820DF15E886F6C6354557BD8 /* Pods-KMPizza.release.xcconfig */;
+			baseConfigurationReference = DBE903B91F261E2C4FAF541651EDF4C0 /* Pods-KMPizza.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -477,7 +479,7 @@
 		};
 		D87F8A33FFD32F31F2F13441EBE05D69 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6733FC78F85718FB815EBE046CF43B02 /* Pods-KMPizza.debug.xcconfig */;
+			baseConfigurationReference = 3207FFCAD580C428031D60028A998A8F /* Pods-KMPizza.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;

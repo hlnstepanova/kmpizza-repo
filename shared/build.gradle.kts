@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -11,16 +9,10 @@ plugins {
 version = "1.0"
 
 kotlin {
-    android()
+    androidTarget()
     jvm()
-
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
-        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-        else -> ::iosX64
-    }
-
-    iosTarget("ios") {}
+    iosArm64()
+    iosSimulatorArm64()
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -31,73 +23,70 @@ kotlin {
             baseName = "shared"
         }
     }
-    
+
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                // Ktor
-                implementation(Versions.Common.KTOR_CLIENT_CORE)
-                implementation(Versions.Common.KTOR_LOGGING)
-                implementation(Versions.Common.KTOR_CLIENT_SERIALIZATION)
-                implementation(Versions.Common.KTOR_CLIENT_CONTENT_NEGOTIATION)
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+        }
+        commonMain.dependencies {
+            // Ktor
+            implementation(Versions.Common.KTOR_CLIENT_CORE)
+            implementation(Versions.Common.KTOR_LOGGING)
+            implementation(Versions.Common.KTOR_CLIENT_SERIALIZATION)
+            implementation(Versions.Common.KTOR_CLIENT_CONTENT_NEGOTIATION)
 
-                // Koin
-                implementation(Versions.Common.KOIN_CORE)
+            // Koin
+            implementation(Versions.Common.KOIN_CORE)
 
-                // Coroutines
-                implementation(Versions.Common.COROUTINES) {
-                    version {
-                        strictly(Versions.COROUTINES_MT)
-                    }
+            // Coroutines
+            implementation(Versions.Common.COROUTINES) {
+                version {
+                    strictly(Versions.COROUTINES_MT)
                 }
-
-                // SQLDelight
-                implementation(Versions.Common.SQLDELIGHT_DRIVER)
             }
+
+            // SQLDelight
+            implementation(Versions.Common.SQLDELIGHT_DRIVER)
         }
 
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-            }
+        commonTest.dependencies {
+            implementation(kotlin("test-common"))
+            implementation(kotlin("test-annotations-common"))
         }
 
-        val androidMain by getting {
-            dependencies {
-                implementation(Versions.Android.KTOR_CLIENT)
-                implementation(Versions.Android.KTOR_OKHTTP)
-                implementation(Versions.Android.VIEW_MODEL)
+        androidMain.dependencies {
+            implementation(Versions.Android.KTOR_CLIENT)
+            implementation(Versions.Android.KTOR_OKHTTP)
+            implementation(Versions.Android.VIEW_MODEL)
 
-                implementation(Versions.Android.SQLDELIGHT_DRIVER)
-            }
+            implementation(Versions.Android.SQLDELIGHT_DRIVER)
         }
 
-        val androidTest by getting {
-            dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
-            }
+        androidNativeTest.dependencies {
+            implementation(kotlin("test-junit"))
+            implementation("junit:junit:4.13.2")
         }
 
-        val iosMain by getting {
-            dependencies {
-                implementation(Versions.iOS.KTOR_CLIENT)
-
-                implementation(Versions.iOS.SQLDELIGHT_DRIVER)
-            }
+        iosMain.dependencies {
+            implementation(Versions.iOS.KTOR_CLIENT)
+            implementation(Versions.iOS.SQLDELIGHT_DRIVER)
         }
-
-        val iosTest by getting
     }
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 34
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 21
-        targetSdk = 31
+        targetSdk = 34
+    }
+    namespace = "dev.tutorial.kmpizza"
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 

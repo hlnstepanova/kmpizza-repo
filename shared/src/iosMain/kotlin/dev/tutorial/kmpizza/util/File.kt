@@ -11,7 +11,7 @@ actual typealias ImageFile = UIImage
 
 actual fun ImageFile.toByteArray() = UIImagePNGRepresentation(this)?.toByteArray() ?: emptyArray<Byte>().toByteArray()
 
-@OptIn(ExperimentalUnsignedTypes::class)
+@OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
 private fun NSData.toByteArray(): ByteArray = ByteArray(length.toInt()).apply {
     usePinned {
         memcpy(it.addressOf(0), bytes, length)

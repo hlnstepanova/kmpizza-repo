@@ -1,5 +1,5 @@
 object Versions {
-    const val KOTLIN_VERSION = "1.7.20"
+    const val KOTLIN_VERSION = "1.9.20"
     const val KTOR_VERSION = "2.1.3"
     const val SHADOW_JAR_VERSION = "7.1.1"
     const val EXPOSED_VERSION = "0.36.2"
