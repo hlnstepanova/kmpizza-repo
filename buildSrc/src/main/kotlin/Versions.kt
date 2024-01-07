@@ -9,13 +9,13 @@ object Versions {
     const val KOIN_KTOR_VERSION = "3.3.0"
     const val AWS_VERSION = "2.17.102"
     const val LIFECYCLE_VERSION = "2.4.1"
-    const val COMPOSE = "1.3.0"
-    const val COMPOSE_ACT = "1.6.0-rc02"
-    const val COMPOSE_NAV = "2.5.2"
+    const val COMPOSE = "1.5.4"
+    const val COMPOSE_ACT = "1.8.2"
+    const val COMPOSE_NAV = "2.7.6"
     const val MATERIAL = "1.5.0"
-    const val COIL = "2.0.0-rc03"
+    const val COIL = "2.5.0"
     const val SLF4J_VERSION = "2.17.2"
-    const val COROUTINES_MT = "1.6.4"
+    const val COROUTINES_MT = "1.7.3"
     const val SQL_DELIGHT = "1.5.3"
 
     object Jvm {
